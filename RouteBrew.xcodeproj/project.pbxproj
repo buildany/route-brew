@@ -1,0 +1,646 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		341C04D028F5663A008B48FF /* RouteBrewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C04CF28F5663A008B48FF /* RouteBrewApp.swift */; };
+		341C04D228F5663A008B48FF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C04D128F5663A008B48FF /* ContentView.swift */; };
+		341C04D428F5663C008B48FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 341C04D328F5663C008B48FF /* Assets.xcassets */; };
+		341C04D728F5663C008B48FF /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 341C04D628F5663C008B48FF /* Preview Assets.xcassets */; };
+		341C04E128F5663C008B48FF /* RouteBrewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C04E028F5663C008B48FF /* RouteBrewTests.swift */; };
+		341C04EB28F5663C008B48FF /* RouteBrewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C04EA28F5663C008B48FF /* RouteBrewUITests.swift */; };
+		341C04ED28F5663C008B48FF /* RouteBrewUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C04EC28F5663C008B48FF /* RouteBrewUITestsLaunchTests.swift */; };
+		341C04FA28F56875008B48FF /* AddNewRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C04F928F56875008B48FF /* AddNewRouteView.swift */; };
+		341C04FC28F5723E008B48FF /* ContentView-ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C04FB28F5723E008B48FF /* ContentView-ViewModel.swift */; };
+		341C04FE28F57483008B48FF /* LocationDataManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C04FD28F57483008B48FF /* LocationDataManager.swift */; };
+		341C050028F57D95008B48FF /* RoutesListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C04FF28F57D95008B48FF /* RoutesListView.swift */; };
+		341C050228F57E20008B48FF /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C050128F57E20008B48FF /* BackgroundView.swift */; };
+		341C050428F57EF8008B48FF /* LockedAppView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C050328F57EF8008B48FF /* LockedAppView.swift */; };
+		341C050828F5833C008B48FF /* RoutesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C050728F5833C008B48FF /* RoutesView.swift */; };
+		341C050A28F584B6008B48FF /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C050928F584B6008B48FF /* Route.swift */; };
+		341C050C28F5B647008B48FF /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C050B28F5B647008B48FF /* Location.swift */; };
+		341C051228F6B72F008B48FF /* RoutesCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C051128F6B72F008B48FF /* RoutesCardView.swift */; };
+		341C051428F6B770008B48FF /* NoRoutesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C051328F6B770008B48FF /* NoRoutesView.swift */; };
+		341C051628F6B7F0008B48FF /* RouteCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C051528F6B7F0008B48FF /* RouteCard.swift */; };
+		341C051828F6BCC9008B48FF /* TrailingIconLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C051728F6BCC9008B48FF /* TrailingIconLabelStyle.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		341C04DD28F5663C008B48FF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 341C04C428F5663A008B48FF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 341C04CB28F5663A008B48FF;
+			remoteInfo = RouteBrew;
+		};
+		341C04E728F5663C008B48FF /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 341C04C428F5663A008B48FF /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 341C04CB28F5663A008B48FF;
+			remoteInfo = RouteBrew;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		341C04CC28F5663A008B48FF /* RouteBrew.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RouteBrew.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		341C04CF28F5663A008B48FF /* RouteBrewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteBrewApp.swift; sourceTree = "<group>"; };
+		341C04D128F5663A008B48FF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		341C04D328F5663C008B48FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		341C04D628F5663C008B48FF /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		341C04DC28F5663C008B48FF /* RouteBrewTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RouteBrewTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		341C04E028F5663C008B48FF /* RouteBrewTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteBrewTests.swift; sourceTree = "<group>"; };
+		341C04E628F5663C008B48FF /* RouteBrewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RouteBrewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		341C04EA28F5663C008B48FF /* RouteBrewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteBrewUITests.swift; sourceTree = "<group>"; };
+		341C04EC28F5663C008B48FF /* RouteBrewUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteBrewUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		341C04F928F56875008B48FF /* AddNewRouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewRouteView.swift; sourceTree = "<group>"; };
+		341C04FB28F5723E008B48FF /* ContentView-ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ContentView-ViewModel.swift"; sourceTree = "<group>"; };
+		341C04FD28F57483008B48FF /* LocationDataManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationDataManager.swift; sourceTree = "<group>"; };
+		341C04FF28F57D95008B48FF /* RoutesListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesListView.swift; sourceTree = "<group>"; };
+		341C050128F57E20008B48FF /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
+		341C050328F57EF8008B48FF /* LockedAppView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LockedAppView.swift; sourceTree = "<group>"; };
+		341C050728F5833C008B48FF /* RoutesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesView.swift; sourceTree = "<group>"; };
+		341C050928F584B6008B48FF /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
+		341C050B28F5B647008B48FF /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
+		341C051128F6B72F008B48FF /* RoutesCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoutesCardView.swift; sourceTree = "<group>"; };
+		341C051328F6B770008B48FF /* NoRoutesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoRoutesView.swift; sourceTree = "<group>"; };
+		341C051528F6B7F0008B48FF /* RouteCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteCard.swift; sourceTree = "<group>"; };
+		341C051728F6BCC9008B48FF /* TrailingIconLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailingIconLabelStyle.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		341C04C928F5663A008B48FF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		341C04D928F5663C008B48FF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		341C04E328F5663C008B48FF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		341C04C328F5663A008B48FF = {
+			isa = PBXGroup;
+			children = (
+				341C04CE28F5663A008B48FF /* RouteBrew */,
+				341C04DF28F5663C008B48FF /* RouteBrewTests */,
+				341C04E928F5663C008B48FF /* RouteBrewUITests */,
+				341C04CD28F5663A008B48FF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		341C04CD28F5663A008B48FF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				341C04CC28F5663A008B48FF /* RouteBrew.app */,
+				341C04DC28F5663C008B48FF /* RouteBrewTests.xctest */,
+				341C04E628F5663C008B48FF /* RouteBrewUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		341C04CE28F5663A008B48FF /* RouteBrew */ = {
+			isa = PBXGroup;
+			children = (
+				341C04F928F56875008B48FF /* AddNewRouteView.swift */,
+				341C050128F57E20008B48FF /* BackgroundView.swift */,
+				341C04FB28F5723E008B48FF /* ContentView-ViewModel.swift */,
+				341C04D128F5663A008B48FF /* ContentView.swift */,
+				341C050B28F5B647008B48FF /* Location.swift */,
+				341C04FD28F57483008B48FF /* LocationDataManager.swift */,
+				341C050328F57EF8008B48FF /* LockedAppView.swift */,
+				341C051328F6B770008B48FF /* NoRoutesView.swift */,
+				341C050928F584B6008B48FF /* Route.swift */,
+				341C04CF28F5663A008B48FF /* RouteBrewApp.swift */,
+				341C051128F6B72F008B48FF /* RoutesCardView.swift */,
+				341C051528F6B7F0008B48FF /* RouteCard.swift */,
+				341C051728F6BCC9008B48FF /* TrailingIconLabelStyle.swift */,
+				341C04FF28F57D95008B48FF /* RoutesListView.swift */,
+				341C050728F5833C008B48FF /* RoutesView.swift */,
+				341C04D328F5663C008B48FF /* Assets.xcassets */,
+				341C04D528F5663C008B48FF /* Preview Content */,
+			);
+			path = RouteBrew;
+			sourceTree = "<group>";
+		};
+		341C04D528F5663C008B48FF /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				341C04D628F5663C008B48FF /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		341C04DF28F5663C008B48FF /* RouteBrewTests */ = {
+			isa = PBXGroup;
+			children = (
+				341C04E028F5663C008B48FF /* RouteBrewTests.swift */,
+			);
+			path = RouteBrewTests;
+			sourceTree = "<group>";
+		};
+		341C04E928F5663C008B48FF /* RouteBrewUITests */ = {
+			isa = PBXGroup;
+			children = (
+				341C04EA28F5663C008B48FF /* RouteBrewUITests.swift */,
+				341C04EC28F5663C008B48FF /* RouteBrewUITestsLaunchTests.swift */,
+			);
+			path = RouteBrewUITests;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		341C04CB28F5663A008B48FF /* RouteBrew */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 341C04F028F5663C008B48FF /* Build configuration list for PBXNativeTarget "RouteBrew" */;
+			buildPhases = (
+				341C04C828F5663A008B48FF /* Sources */,
+				341C04C928F5663A008B48FF /* Frameworks */,
+				341C04CA28F5663A008B48FF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = RouteBrew;
+			productName = RouteBrew;
+			productReference = 341C04CC28F5663A008B48FF /* RouteBrew.app */;
+			productType = "com.apple.product-type.application";
+		};
+		341C04DB28F5663C008B48FF /* RouteBrewTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 341C04F328F5663C008B48FF /* Build configuration list for PBXNativeTarget "RouteBrewTests" */;
+			buildPhases = (
+				341C04D828F5663C008B48FF /* Sources */,
+				341C04D928F5663C008B48FF /* Frameworks */,
+				341C04DA28F5663C008B48FF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				341C04DE28F5663C008B48FF /* PBXTargetDependency */,
+			);
+			name = RouteBrewTests;
+			productName = RouteBrewTests;
+			productReference = 341C04DC28F5663C008B48FF /* RouteBrewTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		341C04E528F5663C008B48FF /* RouteBrewUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 341C04F628F5663C008B48FF /* Build configuration list for PBXNativeTarget "RouteBrewUITests" */;
+			buildPhases = (
+				341C04E228F5663C008B48FF /* Sources */,
+				341C04E328F5663C008B48FF /* Frameworks */,
+				341C04E428F5663C008B48FF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				341C04E828F5663C008B48FF /* PBXTargetDependency */,
+			);
+			name = RouteBrewUITests;
+			productName = RouteBrewUITests;
+			productReference = 341C04E628F5663C008B48FF /* RouteBrewUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		341C04C428F5663A008B48FF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1400;
+				LastUpgradeCheck = 1400;
+				TargetAttributes = {
+					341C04CB28F5663A008B48FF = {
+						CreatedOnToolsVersion = 14.0.1;
+					};
+					341C04DB28F5663C008B48FF = {
+						CreatedOnToolsVersion = 14.0.1;
+						TestTargetID = 341C04CB28F5663A008B48FF;
+					};
+					341C04E528F5663C008B48FF = {
+						CreatedOnToolsVersion = 14.0.1;
+						TestTargetID = 341C04CB28F5663A008B48FF;
+					};
+				};
+			};
+			buildConfigurationList = 341C04C728F5663A008B48FF /* Build configuration list for PBXProject "RouteBrew" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 341C04C328F5663A008B48FF;
+			productRefGroup = 341C04CD28F5663A008B48FF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				341C04CB28F5663A008B48FF /* RouteBrew */,
+				341C04DB28F5663C008B48FF /* RouteBrewTests */,
+				341C04E528F5663C008B48FF /* RouteBrewUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		341C04CA28F5663A008B48FF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				341C04D728F5663C008B48FF /* Preview Assets.xcassets in Resources */,
+				341C04D428F5663C008B48FF /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		341C04DA28F5663C008B48FF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		341C04E428F5663C008B48FF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		341C04C828F5663A008B48FF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				341C050028F57D95008B48FF /* RoutesListView.swift in Sources */,
+				341C04D228F5663A008B48FF /* ContentView.swift in Sources */,
+				341C051228F6B72F008B48FF /* RoutesCardView.swift in Sources */,
+				341C050A28F584B6008B48FF /* Route.swift in Sources */,
+				341C051428F6B770008B48FF /* NoRoutesView.swift in Sources */,
+				341C04FC28F5723E008B48FF /* ContentView-ViewModel.swift in Sources */,
+				341C050228F57E20008B48FF /* BackgroundView.swift in Sources */,
+				341C051628F6B7F0008B48FF /* RouteCard.swift in Sources */,
+				341C050428F57EF8008B48FF /* LockedAppView.swift in Sources */,
+				341C050828F5833C008B48FF /* RoutesView.swift in Sources */,
+				341C04FA28F56875008B48FF /* AddNewRouteView.swift in Sources */,
+				341C04D028F5663A008B48FF /* RouteBrewApp.swift in Sources */,
+				341C050C28F5B647008B48FF /* Location.swift in Sources */,
+				341C051828F6BCC9008B48FF /* TrailingIconLabelStyle.swift in Sources */,
+				341C04FE28F57483008B48FF /* LocationDataManager.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		341C04D828F5663C008B48FF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				341C04E128F5663C008B48FF /* RouteBrewTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		341C04E228F5663C008B48FF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				341C04ED28F5663C008B48FF /* RouteBrewUITestsLaunchTests.swift in Sources */,
+				341C04EB28F5663C008B48FF /* RouteBrewUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		341C04DE28F5663C008B48FF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 341C04CB28F5663A008B48FF /* RouteBrew */;
+			targetProxy = 341C04DD28F5663C008B48FF /* PBXContainerItemProxy */;
+		};
+		341C04E828F5663C008B48FF /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 341C04CB28F5663A008B48FF /* RouteBrew */;
+			targetProxy = 341C04E728F5663C008B48FF /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		341C04EE28F5663C008B48FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		341C04EF28F5663C008B48FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		341C04F128F5663C008B48FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"RouteBrew/Preview Content\"";
+				DEVELOPMENT_TEAM = H3HDHFY9SQ;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We need to unlock your data.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Enable location services to track your route ETA.";
+				INFOPLIST_KEY_NSLocationUsageDescription = "Enable location services to track your route ETA.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Enable location services to track your route ETA .";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = buildany.RouteBrew;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		341C04F228F5663C008B48FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"RouteBrew/Preview Content\"";
+				DEVELOPMENT_TEAM = H3HDHFY9SQ;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSFaceIDUsageDescription = "We need to unlock your data.";
+				INFOPLIST_KEY_NSLocationAlwaysAndWhenInUseUsageDescription = "Enable location services to track your route ETA.";
+				INFOPLIST_KEY_NSLocationUsageDescription = "Enable location services to track your route ETA.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "Enable location services to track your route ETA .";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = buildany.RouteBrew;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		341C04F428F5663C008B48FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = buildany.RouteBrewTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RouteBrew.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/RouteBrew";
+			};
+			name = Debug;
+		};
+		341C04F528F5663C008B48FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = buildany.RouteBrewTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RouteBrew.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/RouteBrew";
+			};
+			name = Release;
+		};
+		341C04F728F5663C008B48FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = buildany.RouteBrewUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = RouteBrew;
+			};
+			name = Debug;
+		};
+		341C04F828F5663C008B48FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = buildany.RouteBrewUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = RouteBrew;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		341C04C728F5663A008B48FF /* Build configuration list for PBXProject "RouteBrew" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				341C04EE28F5663C008B48FF /* Debug */,
+				341C04EF28F5663C008B48FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		341C04F028F5663C008B48FF /* Build configuration list for PBXNativeTarget "RouteBrew" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				341C04F128F5663C008B48FF /* Debug */,
+				341C04F228F5663C008B48FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		341C04F328F5663C008B48FF /* Build configuration list for PBXNativeTarget "RouteBrewTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				341C04F428F5663C008B48FF /* Debug */,
+				341C04F528F5663C008B48FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		341C04F628F5663C008B48FF /* Build configuration list for PBXNativeTarget "RouteBrewUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				341C04F728F5663C008B48FF /* Debug */,
+				341C04F828F5663C008B48FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 341C04C428F5663A008B48FF /* Project object */;
+}
