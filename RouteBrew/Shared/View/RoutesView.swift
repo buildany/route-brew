@@ -9,12 +9,10 @@ import SwiftUI
 
 struct RoutesView: View {
     @State private var showingSheet = false
-    private let locationManager = LocationDataManager()
-    
+ 
     var body: some View {
         ZStack {
             RoutesListView()
-               
             VStack {
                 Spacer()
                 Button {
@@ -37,7 +35,7 @@ struct RoutesView: View {
 
 struct RoutesView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = ViewModel()
+        let viewModel = LocationViewModel()
 
         viewModel.addRoute(name: "School", startLocation: (52.211525, 5.924628, "Home"), endLocation: (52.0057008, 5.8265593, "School"))
         return RoutesView().environmentObject(viewModel)

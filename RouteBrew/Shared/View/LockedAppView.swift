@@ -8,7 +8,7 @@
 import SwiftUI
 
 struct LockedAppView: View {
-    @EnvironmentObject var viewModel: ViewModel
+    @EnvironmentObject var viewModel: RoutesViewModel
 
     var body: some View {
         VStack {

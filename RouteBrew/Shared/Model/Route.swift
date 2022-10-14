@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import CoreLocation
 
 struct Route: Identifiable, Codable, Equatable {
     var id: UUID

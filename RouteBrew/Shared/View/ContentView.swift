@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
+
     var body: some View {
         ZStack {
             BackgroundView()
@@ -21,8 +22,6 @@ struct ContentView: View {
 
 struct ContentView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = ViewModel()
-
-        return ContentView().environmentObject(viewModel)
+        ContentView()
     }
 }

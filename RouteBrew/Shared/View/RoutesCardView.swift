@@ -8,16 +8,16 @@
 import SwiftUI
 
 struct RoutesCardView: View {
-    @EnvironmentObject var viewModel: ViewModel
+    @EnvironmentObject var locationViewModel: LocationViewModel
     @State private var showingSheet = false
 
     var body: some View {
-        if viewModel.routes.count == 0 {
+        if locationViewModel.routes.count == 0 {
             NoRoutesView()
         } else {
             ScrollView(.vertical, showsIndicators: false) {
                 VStack {
-                    ForEach(viewModel.routes) { route in
+                    ForEach(locationViewModel.routes) { route in
                         RouteCard(route: route)
                     }.onDelete(perform: removeRoute)
                 }
@@ -26,13 +26,13 @@ struct RoutesCardView: View {
     }
 
     func removeRoute(at offsets: IndexSet) {
-        viewModel.removeRoute(at: offsets)
+        locationViewModel.removeRoute(at: offsets)
     }
 }
 
 struct RoutesCardView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = ViewModel()
+        let viewModel = LocationViewModel()
         viewModel.addRoute(name: "School", startLocation: (52.211525, 5.924628, "Home"), endLocation: (52.0057008, 5.8265593, "School"))
         viewModel.addRoute(name: "Home", startLocation: (52.211525, 5.924628, "Home"), endLocation: (52.0057008, 5.8265593, "School"))
         viewModel.addRoute(name: "Home", startLocation: (52.211525, 5.924628, "Home"), endLocation: (52.0057008, 5.8265593, "School"))
