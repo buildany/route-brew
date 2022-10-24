@@ -20,9 +20,9 @@ enum LocationServiceStatus {
 
 class LocationViewModel: NSObject, ObservableObject, MKMapViewDelegate, CLLocationManagerDelegate {
     var manager = CLLocationManager()
-    
+
     @Published private(set) var locationServiceStatus: LocationServiceStatus = .undefined
-    @Published var mapView: MKMapView = .init()
+    @Published var mapView: ExtendedMapView = .init()
     @Published private(set) var routes = [Route]()
     @Published var searchText: String = ""
     @Published private(set) var fetchedPlaces: [CLPlacemark]?
@@ -35,16 +35,28 @@ class LocationViewModel: NSObject, ObservableObject, MKMapViewDelegate, CLLocati
     @Published var routeEndPlacemark: CLPlacemark?
 
     @Published var route: [CLPlacemark] = .init()
+    @Published var routeRefs: [String: (Double, UIColor, Bool)] = [:]
+    @Published var preferredRoute: String?
 
     let startPinIdentifier = "STARTPINIDENTIFIER"
     let endPinIdentifier = "ENDINIDENTIFIER"
-    @Published var routeSelection: RouteSelection = .start
+    
+    @Published var routeSelection: RouteSelection = .start {
+        didSet {
+            if routeSelection == .done {
+                self.requestDirections()
+            } else if routeSelection == .start {
+                self.mapView.removeOverlays(self.mapView.overlays)
+            }
+        }
+    }
+
 
     override init() {
         super.init()
         manager.delegate = self
         mapView.delegate = self
-  
+        mapView.onLongPress = addAnnotation(for:)
 
         cancellable = $searchText
             .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
@@ -75,11 +87,57 @@ class LocationViewModel: NSObject, ObservableObject, MKMapViewDelegate, CLLocati
         }
     }
 
+    func requestDirections() {
+        guard let startLocation = routeStartLocation else { return }
+        guard let endLocation = routeEndLocation else { return }
+
+        let request = MKDirections.Request()
+        let sourcePlaceMark = MKPlacemark(coordinate: startLocation.coordinate)
+        request.source = MKMapItem(placemark: sourcePlaceMark)
+
+        let destPlaceMark = MKPlacemark(coordinate: endLocation.coordinate)
+        request.destination = MKMapItem(placemark: destPlaceMark)
+        request.transportType = [.automobile]
+        request.requestsAlternateRoutes = true
+
+        let directions = MKDirections(request: request)
+
+        directions.calculate { response, error in
+            guard let response = response else {
+                print("Error: \(error?.localizedDescription ?? "No error specified").")
+
+                self.locationServiceStatus = .error
+                return
+            }
+
+            let minTravelTime = response.routes.map { $0.expectedTravelTime }.min()
+
+            for route in response.routes.sorted(by: { $0.expectedTravelTime > $1.expectedTravelTime }) {
+                print("\(route.name), \(route.expectedTravelTime)")
+                let routeName = String(route.name.hashValue)
+                
+                let routeExpectedTravelTime = Double(route.expectedTravelTime)
+                let routeColor = route.expectedTravelTime == minTravelTime ? UIColor.blue : UIColor.gray
+                let isRoutePreferred = minTravelTime == route.expectedTravelTime
+
+                self.routeRefs[routeName] = (routeExpectedTravelTime, routeColor, isRoutePreferred)
+                if isRoutePreferred {
+                    self.preferredRoute = routeName
+                }
+                route.polyline.subtitle = routeName
+                self.mapView.addOverlay(route.polyline)
+
+                self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+            }
+        }
+    }
+
     func clearSearch() {
         Task {
             await MainActor.run(body: {
                 self.searchText = ""
                 self.fetchedPlaces = nil
+                self.routeRefs = [:]
             })
         }
     }
@@ -114,7 +172,7 @@ class LocationViewModel: NSObject, ObservableObject, MKMapViewDelegate, CLLocati
 
     func useCurrentLocation() {
         if let coordinate = currentUserLocation?.coordinate {
-            mapView.region = .init(center: coordinate, latitudinalMeters: 100000, longitudinalMeters: 100000)
+            mapView.region = .init(center: coordinate, latitudinalMeters: 10000, longitudinalMeters: 10000)
         }
     }
 
@@ -145,24 +203,52 @@ class LocationViewModel: NSObject, ObservableObject, MKMapViewDelegate, CLLocati
     }
 
     func addPin(place: CLPlacemark) {
-        guard(routeSelection != .done) else {return}
-        
+        guard routeSelection != .done else { return }
+
         let annotation = MKPointAnnotation()
         annotation.coordinate = place.location!.coordinate
         annotation.title = place.name
 
         mapView.addAnnotation(annotation)
-        
-        if routeSelection == .start {
-            routeStartLocation = place.location
-            routeStartPlacemark = place
-        } else {
-            routeEndLocation = place.location
-            routeEndPlacemark = place
+
+        Task {
+            await MainActor.run(body: {
+                if routeSelection == .start {
+                    routeStartLocation = place.location
+                    routeStartPlacemark = place
+                } else {
+                    routeEndLocation = place.location
+                    routeEndPlacemark = place
+                }
+
+                clearSearch()
+                toggleRouteSelection()
+            })
         }
-        
-        clearSearch()
-        toggleRouteSelection()
+    }
+
+    func addAnnotation(for coordinate: CLLocationCoordinate2D) {
+        Task {
+            do {
+                let location: CLLocation = .init(latitude: coordinate.latitude, longitude: coordinate.longitude)
+                guard let place = try await reverseLocationCoordinates(location: location) else { return }
+
+                addPin(place: place)
+            } catch {}
+        }
+    }
+
+    func addCurrentLocationPin() {
+        guard routeSelection != .done else { return }
+        guard let currentLocation = currentUserLocation else { return }
+
+        Task {
+            do {
+                guard let place = try await reverseLocationCoordinates(location: currentLocation) else { return }
+
+                addPin(place: place)
+            } catch {}
+        }
     }
 
     func toggleRouteSelection() {
@@ -184,8 +270,21 @@ class LocationViewModel: NSObject, ObservableObject, MKMapViewDelegate, CLLocati
         let marker = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
         marker.isDraggable = true
         marker.canShowCallout = false
-        
+
         return marker
+    }
+
+    func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
+        let renderer = MKPolylineRenderer(overlay: overlay)
+
+        if let sub = overlay.subtitle {
+            print("subtitle: \(sub ?? "")")
+            if sub != nil, let (_, color,_) = routeRefs[sub!] {
+                renderer.strokeColor = color
+            }
+        }
+
+        return renderer
     }
 
     func mapView(_ mapView: MKMapView, annotationView view: MKAnnotationView, didChange newState: MKAnnotationView.DragState, fromOldState oldState: MKAnnotationView.DragState) {

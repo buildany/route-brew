@@ -10,12 +10,14 @@ import SwiftUI
 
 struct MapView: UIViewRepresentable {
     @EnvironmentObject var locationViewModel: LocationViewModel
+    @State private var annotation = MKPointAnnotation()
 
     func makeUIView(context: Context) -> MKMapView {
         return locationViewModel.mapView
     }
 
-    func updateUIView(_ uiView: MKMapView, context: Context) {}
+    func updateUIView(_ uiView: MKMapView, context: Context) {
+    }
 }
 
 struct MapView_Previews: PreviewProvider {

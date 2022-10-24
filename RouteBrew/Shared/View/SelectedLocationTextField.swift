@@ -30,7 +30,9 @@ struct SelectedLocationTextField: View {
                             .foregroundColor(.gray.opacity(0.75))
                             .textCase(.uppercase)
                         Spacer()
-                        Button {} label: {
+                        Button {
+                            onDelete()
+                        } label: {
                             Label {} icon: {
                                 Image(systemName: "xmark")
                             }
