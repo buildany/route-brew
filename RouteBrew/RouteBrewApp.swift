@@ -9,11 +9,13 @@ import SwiftUI
 
 @main
 struct RouteBrewApp: App {
-    @StateObject var locationViewModel = LocationViewModel()
- 
+    @StateObject var tripsModel = TripsViewModel()
+
     var body: some Scene {
         WindowGroup {
-            ContentView().environmentObject(locationViewModel)
+            ContentView()
+                .environmentObject(tripsModel)
+       
         }
     }
 }

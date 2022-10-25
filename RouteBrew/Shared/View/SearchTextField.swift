@@ -10,6 +10,7 @@ import SwiftUI
 
 struct SearchTextField: View {
     @Binding var searchText: String
+    @FocusState var focused: Bool
     var fetchedPlaces: [CLPlacemark]?
     var onSelect: (CLPlacemark) -> Void
     var placeholder: String
@@ -87,12 +88,13 @@ struct SearchTextField: View {
                     RoundedRectangle(cornerRadius: 7)
                         .stroke(Color.gray, lineWidth: 1)
                 )
+                .focused($focused)
         
                 
             }
             
             
-            if let places = fetchedPlaces, !places.isEmpty, value == nil {
+            if let places = fetchedPlaces, !places.isEmpty, value == nil, focused {
                 List {
                     ForEach(places, id: \.self) { place in
                         Button(action: {

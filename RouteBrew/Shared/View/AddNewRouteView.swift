@@ -10,28 +10,24 @@ import LocalAuthentication
 import SwiftUI
 
 struct AddNewRouteView: View {
-    @State var start = ""
-    @State var finish = ""
     @Environment(\.dismiss) var dismiss
-    @EnvironmentObject var locationViewModel: LocationViewModel
+    @EnvironmentObject var tripsModel: TripsViewModel
 
-    
     var body: some View {
         ZStack {
             MapView()
                 .ignoresSafeArea()
             VStack {
                 VStack {
-                    SearchTextField(searchText: $locationViewModel.searchText, fetchedPlaces: locationViewModel.fetchedPlaces, onSelect: locationViewModel.addPin, placeholder: "Start location", value: locationViewModel.routeStartPlacemark,
-                                    canSelectCurrentLocation: locationViewModel.currentUserLocation != locationViewModel.routeEndLocation,
-                                    onSelectCurrentLocation: locationViewModel.addCurrentLocationPin)
-                    if locationViewModel.routeStartPlacemark != nil {
-                        SearchTextField(searchText: $locationViewModel.searchText, fetchedPlaces: locationViewModel.fetchedPlaces, onSelect: locationViewModel.addPin, placeholder: "Final location", value: locationViewModel.routeEndPlacemark,
-                                        canSelectCurrentLocation: locationViewModel.currentUserLocation != locationViewModel.routeStartLocation,
-                                        onSelectCurrentLocation: locationViewModel.addCurrentLocationPin)
-                    }
+                    SearchTextField(searchText: $tripsModel.startSearchText, fetchedPlaces: tripsModel.startFetchedPlaces, onSelect: tripsModel.addPin, placeholder: "Start location", value: tripsModel.routeStartPlacemark,
+                                    canSelectCurrentLocation: tripsModel.canUseCurrentLocation,
+                                    onSelectCurrentLocation: tripsModel.addCurrentLocationPin)
+                    
+                    SearchTextField(searchText: $tripsModel.endSearchText, fetchedPlaces: tripsModel.endFetchedPlaces, onSelect: tripsModel.addPin, placeholder: "Final location", value: tripsModel.routeEndPlacemark,
+                                    canSelectCurrentLocation: tripsModel.canUseCurrentLocation,
+                                    onSelectCurrentLocation: tripsModel.addCurrentLocationPin)
 
-                    if let preferredRoute = locationViewModel.preferredRoute {
+                    if let preferredRoute = tripsModel.preferredRoute {
                         Text(preferredRoute)
                             .padding()
                     }
@@ -47,7 +43,7 @@ struct AddNewRouteView: View {
 
 struct AddNewRouteView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = LocationViewModel()
+        let viewModel = TripsViewModel()
         return AddNewRouteView().environmentObject(viewModel)
     }
 }

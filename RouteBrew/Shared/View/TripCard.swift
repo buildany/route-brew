@@ -7,20 +7,14 @@
 
 import SwiftUI
 
-struct RouteCard: View {
-    var route: Route
+struct TripCard: View {
+    var trip: Trip
     var body: some View {
         VStack(alignment: .leading) {
-            Text(route.name)
+            Text("Trip to School")
                 .accessibilityAddTraits(.isHeader)
                 .font(.title3)
-            Spacer()
-            HStack {
-                Label("31 minutes", systemImage: "clock.arrow.circlepath")
-                Spacer()
-                Label("Workdays", systemImage: "calendar")
-                    .labelStyle(.trailingIcon)
-            }
+           
             
         }
         .padding()
@@ -29,6 +23,6 @@ struct RouteCard: View {
 
 struct RouteCard_Previews: PreviewProvider {
     static var previews: some View {
-        RouteCard(route: Route.example)
+        TripCard(trip: Trip())
     }
 }
