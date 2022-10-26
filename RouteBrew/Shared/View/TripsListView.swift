@@ -8,32 +8,31 @@
 import SwiftUI
 
 struct TripsListView: View {
-    @EnvironmentObject var tripsModel: TripsViewModel
+    var trips: [Trip]
+    var removeTrip: (_ at: IndexSet) -> Void
+
     @State private var showingSheet = false
 
     var body: some View {
-        if tripsModel.trips.count == 0 {
-            NoRoutesView()
-        } else {
-            VStack {
-                List {
-                    ForEach(tripsModel.trips) { trip in
-                        TripCard(trip: trip)
-                    }.onDelete(perform: removeRoute)
-                }
+        VStack {
+            HStack {
+                Text("Your tracked routes".uppercased())
+                    .bold()
+                    .foregroundColor(.red.opacity(0.75))
+                    .padding()
+                Spacer()
+            }
+
+            ForEach(trips) { trip in
+                TripCard(trip: trip)
             }
         }
-    }
-
-    func removeRoute(at offsets: IndexSet) {
-        tripsModel.removeTrip(at: offsets)
+        .padding()
     }
 }
 
 struct TripsListView_Previews: PreviewProvider {
     static var previews: some View {
-        let viewModel = TripsViewModel()
-       
-        return TripsListView().environmentObject(viewModel)
+        return TripsListView(trips: [], removeTrip: { _ in })
     }
 }

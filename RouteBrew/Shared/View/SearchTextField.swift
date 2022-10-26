@@ -10,98 +10,75 @@ import SwiftUI
 
 struct SearchTextField: View {
     @Binding var searchText: String
-    @FocusState var focused: Bool
     var fetchedPlaces: [CLPlacemark]?
     var onSelect: (CLPlacemark) -> Void
     var placeholder: String
-    var value: CLPlacemark?
-    var canSelectCurrentLocation: Bool
+    var placemark: CLPlacemark?
+    var deletePlace: () -> Void
+    var label: String
+    var canUseCurrentLocation: Bool
     var onSelectCurrentLocation: () -> Void
-    
+
+//    @FocusState var focused: Bool
+
     var body: some View {
         VStack {
             VStack(alignment: .leading) {
                 HStack(spacing: 10) {
-                    if value == nil {
-                        Image(systemName: "magnifyingglass")
-                            .foregroundColor(.gray)
-                            .padding(.leading)
-                            .frame(alignment: .leading)
+                    Image(systemName: "\(label).circle")
+                        .foregroundColor(placemark == nil ? .gray.opacity(0.5) : .green.opacity(0.5))
+                        .padding(.leading)
+                        .padding(.trailing)
+                    
+                    TextField(placeholder, text: $searchText)
+                        .padding(.top)
+                        .padding(.bottom)
+                        .foregroundColor(.primary)
+                        .frame(alignment: .leading)
                         
-                        TextField(placeholder, text: $searchText)
-                            .padding(.top)
-                            .padding(.bottom)
-                            .foregroundColor(.primary)
-                            .frame(alignment: .leading)
-                        if canSelectCurrentLocation {
+
+                    HStack {
+                        if let _ = placemark {
                             Button {
-                                onSelectCurrentLocation()
-                            } label: {
-                                Label {} icon: {
-                                    Image(systemName: "location.north.circle.fill")
-                                }
-                            }
-                            .font(.title)
-                            .foregroundColor(.gray)
-                            .shadow(radius: 7)
-                            .padding(.trailing)
-                            .background(.white)
-                            .cornerRadius(7)
-                            .frame(alignment: .trailing)
-                        }
-                    }
-                    if let place = value {
-                        if let selectedPlaceName = place.name,
-                           let selectedPlaceLocality = place.locality,
-                           let sPostalCode = place.postalCode,
-                           let sCountry = place.country
-                        {
-                            Button {
-                                
+                                deletePlace()
                             } label: {
                                 Label {} icon: {
                                     Image(systemName: "xmark")
                                 }
                             }
-                            .font(.title3)
-                            .foregroundColor(.red.opacity(0.75))
+                            .font(.caption)
+                            .foregroundColor(.gray)
                             .clipShape(Circle())
-                            .padding(.leading)
                             .frame(alignment: .leading)
-                           
-                            
-                            Text("\(selectedPlaceName), \(selectedPlaceLocality), \(sPostalCode), \(sCountry)")
-                                .truncationMode(.tail)
-                                .font(.system(size: 15, weight: .semibold, design: .default))
-                                .foregroundColor(.primary)
-                                .padding(.top)
-                                .padding(.bottom)
-                                .padding(.trailing)
-                                .lineLimit(1)
-                                .frame(alignment: .leading)
-                            
+                        }
+                        
+                        if canUseCurrentLocation {
+                            Button {
+                                onSelectCurrentLocation()
+                            } label: {
+                                Image(systemName: "location.fill")
+                                    .padding()
+                                    
+                                    .font(.caption)
+                            }
                         }
                     }
+                    .padding(.trailing)
                 }
-                .frame(maxWidth: .infinity)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 7)
-                        .stroke(Color.gray, lineWidth: 1)
-                )
-                .focused($focused)
-        
-                
             }
+            .frame(maxWidth: .infinity)
+            .overlay(
+                RoundedRectangle(cornerRadius: 7)
+                    .stroke(Color.gray, lineWidth: 1)
+            )
             
-            
-            if let places = fetchedPlaces, !places.isEmpty, value == nil, focused {
+            if let places = fetchedPlaces, !places.isEmpty, placemark == nil {
                 List {
                     ForEach(places, id: \.self) { place in
                         Button(action: {
                             if let _ = place.location?.coordinate {
                                 onSelect(place)
                             }
-                            
                         }) {
                             HStack(spacing: 15) {
                                 Image(systemName: "mappin.circle.fill")

@@ -9,19 +9,13 @@ import MapKit
 import SwiftUI
 
 struct MapView: UIViewRepresentable {
-    @EnvironmentObject var tripsModel: TripsViewModel
     @State private var annotation = MKPointAnnotation()
+    var mkMapView: MKMapView
 
     func makeUIView(context: Context) -> MKMapView {
-        return tripsModel.mapView
+        return mkMapView
     }
 
     func updateUIView(_ uiView: MKMapView, context: Context) {
-    }
-}
-
-struct MapView_Previews: PreviewProvider {
-    static var previews: some View {
-        MapView()
     }
 }

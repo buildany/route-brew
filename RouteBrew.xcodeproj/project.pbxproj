@@ -8,9 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		34047D0D29004B67004946D5 /* ExtendedMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34047D0C29004B67004946D5 /* ExtendedMapView.swift */; };
+		340A9231290945D500688B61 /* RouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340A9230290945D500688B61 /* RouteView.swift */; };
 		340C48282907F12700C28302 /* TripCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340C48272907F12700C28302 /* TripCard.swift */; };
 		340C482A2907F1A600C28302 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340C48292907F1A600C28302 /* Trip.swift */; };
-		340C482E2907FEA900C28302 /* TripReactiveForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340C482D2907FEA900C28302 /* TripReactiveForm.swift */; };
+		340C482E2907FEA900C28302 /* TripsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340C482D2907FEA900C28302 /* TripsViewModel.swift */; };
 		341C04D028F5663A008B48FF /* RouteBrewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C04CF28F5663A008B48FF /* RouteBrewApp.swift */; };
 		341C04D228F5663A008B48FF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C04D128F5663A008B48FF /* ContentView.swift */; };
 		341C04D428F5663C008B48FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 341C04D328F5663C008B48FF /* Assets.xcassets */; };
@@ -18,8 +19,8 @@
 		341C04E128F5663C008B48FF /* RouteBrewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C04E028F5663C008B48FF /* RouteBrewTests.swift */; };
 		341C04EB28F5663C008B48FF /* RouteBrewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C04EA28F5663C008B48FF /* RouteBrewUITests.swift */; };
 		341C04ED28F5663C008B48FF /* RouteBrewUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C04EC28F5663C008B48FF /* RouteBrewUITestsLaunchTests.swift */; };
-		341C04FA28F56875008B48FF /* AddNewRouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C04F928F56875008B48FF /* AddNewRouteView.swift */; };
-		341C04FE28F57483008B48FF /* TripsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C04FD28F57483008B48FF /* TripsViewModel.swift */; };
+		341C04FA28F56875008B48FF /* TripFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C04F928F56875008B48FF /* TripFormView.swift */; };
+		341C04FE28F57483008B48FF /* TripReactiveFormModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C04FD28F57483008B48FF /* TripReactiveFormModel.swift */; };
 		341C050028F57D95008B48FF /* TripsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C04FF28F57D95008B48FF /* TripsListView.swift */; };
 		341C050228F57E20008B48FF /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C050128F57E20008B48FF /* BackgroundView.swift */; };
 		341C050828F5833C008B48FF /* TripsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C050728F5833C008B48FF /* TripsView.swift */; };
@@ -50,9 +51,10 @@
 
 /* Begin PBXFileReference section */
 		34047D0C29004B67004946D5 /* ExtendedMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedMapView.swift; sourceTree = "<group>"; };
+		340A9230290945D500688B61 /* RouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteView.swift; sourceTree = "<group>"; };
 		340C48272907F12700C28302 /* TripCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripCard.swift; sourceTree = "<group>"; };
 		340C48292907F1A600C28302 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
-		340C482D2907FEA900C28302 /* TripReactiveForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripReactiveForm.swift; sourceTree = "<group>"; };
+		340C482D2907FEA900C28302 /* TripsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsViewModel.swift; sourceTree = "<group>"; };
 		341C04CC28F5663A008B48FF /* RouteBrew.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RouteBrew.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		341C04CF28F5663A008B48FF /* RouteBrewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteBrewApp.swift; sourceTree = "<group>"; };
 		341C04D128F5663A008B48FF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -63,8 +65,8 @@
 		341C04E628F5663C008B48FF /* RouteBrewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RouteBrewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		341C04EA28F5663C008B48FF /* RouteBrewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteBrewUITests.swift; sourceTree = "<group>"; };
 		341C04EC28F5663C008B48FF /* RouteBrewUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteBrewUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		341C04F928F56875008B48FF /* AddNewRouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddNewRouteView.swift; sourceTree = "<group>"; };
-		341C04FD28F57483008B48FF /* TripsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsViewModel.swift; sourceTree = "<group>"; };
+		341C04F928F56875008B48FF /* TripFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripFormView.swift; sourceTree = "<group>"; };
+		341C04FD28F57483008B48FF /* TripReactiveFormModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripReactiveFormModel.swift; sourceTree = "<group>"; };
 		341C04FF28F57D95008B48FF /* TripsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsListView.swift; sourceTree = "<group>"; };
 		341C050128F57E20008B48FF /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		341C050728F5833C008B48FF /* TripsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsView.swift; sourceTree = "<group>"; };
@@ -161,8 +163,8 @@
 		341C051F28F7178A008B48FF /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
-				341C04FD28F57483008B48FF /* TripsViewModel.swift */,
-				340C482D2907FEA900C28302 /* TripReactiveForm.swift */,
+				341C04FD28F57483008B48FF /* TripReactiveFormModel.swift */,
+				340C482D2907FEA900C28302 /* TripsViewModel.swift */,
 			);
 			path = ViewModel;
 			sourceTree = "<group>";
@@ -180,7 +182,8 @@
 		341C052128F717A3008B48FF /* View */ = {
 			isa = PBXGroup;
 			children = (
-				341C04F928F56875008B48FF /* AddNewRouteView.swift */,
+				341C04F928F56875008B48FF /* TripFormView.swift */,
+				340A9230290945D500688B61 /* RouteView.swift */,
 				341C050128F57E20008B48FF /* BackgroundView.swift */,
 				341C04D128F5663A008B48FF /* ContentView.swift */,
 				341C051D28F71685008B48FF /* MapView.swift */,
@@ -341,15 +344,16 @@
 				341C051428F6B770008B48FF /* NoRoutesView.swift in Sources */,
 				341C050228F57E20008B48FF /* BackgroundView.swift in Sources */,
 				341C051E28F71686008B48FF /* MapView.swift in Sources */,
-				340C482E2907FEA900C28302 /* TripReactiveForm.swift in Sources */,
+				340C482E2907FEA900C28302 /* TripsViewModel.swift in Sources */,
 				341C050828F5833C008B48FF /* TripsView.swift in Sources */,
-				341C04FA28F56875008B48FF /* AddNewRouteView.swift in Sources */,
+				341C04FA28F56875008B48FF /* TripFormView.swift in Sources */,
 				341C04D028F5663A008B48FF /* RouteBrewApp.swift in Sources */,
 				341C050C28F5B647008B48FF /* Location.swift in Sources */,
 				340C482A2907F1A600C28302 /* Trip.swift in Sources */,
 				341C051828F6BCC9008B48FF /* TrailingIconLabelStyle.swift in Sources */,
-				341C04FE28F57483008B48FF /* TripsViewModel.swift in Sources */,
+				341C04FE28F57483008B48FF /* TripReactiveFormModel.swift in Sources */,
 				34047D0D29004B67004946D5 /* ExtendedMapView.swift in Sources */,
+				340A9231290945D500688B61 /* RouteView.swift in Sources */,
 				341C056228F95C26008B48FF /* SearchTextField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

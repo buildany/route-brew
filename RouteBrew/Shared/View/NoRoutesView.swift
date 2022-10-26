@@ -12,6 +12,7 @@ struct NoRoutesView: View {
         Text("Add new route to tracker")
             .font(.system(size: 18))
             .foregroundColor(.red)
+            .bold()
     }
 }
 

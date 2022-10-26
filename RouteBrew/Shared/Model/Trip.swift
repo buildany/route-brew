@@ -11,8 +11,9 @@ enum Day {
     case Monday, Tuesday, Wednesday, Thursday, Friday, Saturday, Sunday
 }
 
-class Trip: Identifiable, Equatable {
-    var routes: [Route] = [Route]()
+struct Trip: Identifiable, Equatable {
+    var routes: [Route] 
+    var label: String
     var id: UUID = UUID()
     
     static var defaultDepartureTime: Date {
@@ -22,10 +23,10 @@ class Trip: Identifiable, Equatable {
         return Calendar.current.date(from: components) ?? Date.now
     }
     
-    static var defaultCommuteDays: [Day] = [.Monday, .Tuesday, .Wednesday, .Thursday, .Friday]
+    static var defaultSchedule: [Day] = [.Monday, .Tuesday, .Wednesday, .Thursday, .Friday]
     
     var departureTime: Date = defaultDepartureTime
-    var commuteDays: [Day] = defaultCommuteDays
+    var schedule: [Day] = defaultSchedule
     
     static func ==(trip1: Trip, trip2: Trip) -> Bool {
         trip1.id == trip2.id
