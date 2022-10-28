@@ -24,23 +24,22 @@ enum RoutePin {
 
 class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLocationManagerDelegate {
     var manager = CLLocationManager()
-
+    @Published var trip = Trip()
     @Published private(set) var locationServiceStatus: LocationServiceStatus = .undefined
     @Published var mapView: ExtendedMapView = .init()
-    @Published var tripLabel: String = "Commute to work" {
-        didSet {
-            tripLabelPublisher.send(tripLabel)
-        }
-    }
-    private let tripLabelPublisher = CurrentValueSubject<String?, Never>(nil)
-    
+    @Published var tripLabel: String = "Everyday drive"
     @Published var startSearchText: String = ""
     @Published var endSearchText: String = ""
     @Published private(set) var startFetchedPlaces: [CLPlacemark]?
     @Published private(set) var endFetchedPlaces: [CLPlacemark]?
     @Published private(set) var currentUserLocation: CLLocation?
     @Published private(set) var canUseCurrentLocation = true
-
+    @Published var transportType = MKDirectionsTransportType.automobile.rawValue
+    @Published private(set) var availableTransportTypes = [MKDirectionsTransportType.automobile.rawValue, MKDirectionsTransportType.transit.rawValue, MKDirectionsTransportType.walking.rawValue]
+    @Published var alarmTime = Date()
+    @Published var repeatDays: Weekdays = Weekdays()
+    @Published var timeInterpretation: TimeInterpretation = .departure
+    
     private var startAnotation: MKAnnotation?
     private var endAnotation: MKAnnotation?
 
@@ -64,7 +63,6 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
 
     private var cancellableSet: Set<AnyCancellable> = []
     @Published var validationMessages = [(RoutePin, String)]()
-
     @Published var saveAllowed: Bool = false
 
     private let startPinIdentifier = "startPinIdentifier"
@@ -75,7 +73,7 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
         manager.delegate = self
         mapView.delegate = self
         mapView.onLongPress = addAnnotation(for:)
-        
+
         $startSearchText
             .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
             .removeDuplicates()
@@ -100,10 +98,9 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
             })
             .store(in: &cancellableSet)
 
-        
-        let validationPipeline = Publishers.CombineLatest3(startPlacePublisher, endPlacePublisher, tripLabelPublisher)
+        let validationPipeline = Publishers.CombineLatest(startPlacePublisher, endPlacePublisher)
             .map { arg -> [(RoutePin, String)] in
-                let (start, end, label) = arg
+                let (start, end) = arg
                 var validationMsg = [(RoutePin, String)]()
                 if self.areSame(start?.location, end?.location) {
                     validationMsg.append((.end, "The placemarks should be different."))
@@ -118,10 +115,6 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
                 if end == nil {
                     validationMsg.append((.end, "Select finish point."))
                 }
-                
-                if label == "" {
-                    validationMsg.append((.end, "Enter label"))
-                }
 
                 return validationMsg
             }
@@ -129,7 +122,7 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
         validationPipeline
             .map {
                 stringArray in
-                return stringArray.count < 1
+                stringArray.count < 1
             }
             .assign(to: \.saveAllowed, on: self)
             .store(in: &cancellableSet)
@@ -158,9 +151,9 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
             mapView.removeAnnotation(an2)
         }
     }
-    
+
     func getTrip() -> Trip {
-        return Trip(routes: self.routes, label: self.tripLabel)
+        return Trip(routes: routes, label: tripLabel, alarmTime: alarmTime, weekdays: repeatDays )
     }
 
     private func areSame(_ l1: CLLocation?, _ l2: CLLocation?) -> Bool {
@@ -206,8 +199,9 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
 
         let destPlaceMark = MKPlacemark(coordinate: endLocation.coordinate)
         request.destination = MKMapItem(placemark: destPlaceMark)
-        request.transportType = [.automobile]
+        request.transportType = [MKDirectionsTransportType(rawValue: transportType)]
         request.requestsAlternateRoutes = true
+  
 
         let directions = MKDirections(request: request)
 
@@ -220,16 +214,21 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
             }
 
             let minTravelTime = response.routes.map { $0.expectedTravelTime }.min()
-
+            var enabledRoute: MKRoute?
             for route in response.routes.sorted(by: { $0.expectedTravelTime > $1.expectedTravelTime }) {
                 let routeExpectedTravelTime = Double(route.expectedTravelTime)
-                let routeData = Route(name: route.name, travelTime: routeExpectedTravelTime, enabled: minTravelTime == route.expectedTravelTime)
+                let isEnabled = minTravelTime == route.expectedTravelTime
+                let routeData = Route(name: route.name, travelTime: routeExpectedTravelTime, transportType: route.transportType, enabled: isEnabled)
                 self.routes.append(routeData)
-
+                
                 route.polyline.subtitle = routeData.id.uuidString
-                self.mapView.addOverlay(route.polyline)
+                route.polyline.title = route.name
 
-                self.mapView.setVisibleMapRect(route.polyline.boundingMapRect, animated: true)
+                self.mapView.addOverlay(route.polyline)
+                enabledRoute = isEnabled ? route : nil
+            }
+            if let eRoute = enabledRoute {
+                self.mapView.setVisibleMapRect(eRoute.polyline.boundingMapRect, animated: true)
             }
         }
     }
@@ -303,11 +302,11 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
                     endSearchText = placeDescription
                     endFetchedPlaces = []
                 }
-                
-                if routeEndPlacemark != nil && routeStartPlacemark != nil {
+
+                if routeEndPlacemark != nil, routeStartPlacemark != nil {
                     self.requestDirections()
                 }
-              
+
             })
         }
     }

@@ -10,7 +10,6 @@ import SwiftUI
 struct TripCard: View {
     var trip: Trip
     var body: some View {
-        
         HStack {
             VStack(alignment: .leading) {
                 Text(trip.label)
@@ -19,7 +18,6 @@ struct TripCard: View {
                 Text(trip.label)
                     .accessibilityAddTraits(.isHeader)
                     .font(.caption)
-                
             }
             Spacer()
             Image(systemName: "trash")
@@ -29,12 +27,11 @@ struct TripCard: View {
         .background(.white)
         .cornerRadius(7)
         .shadow(radius: 2)
-        
     }
 }
 
 struct RouteCard_Previews: PreviewProvider {
     static var previews: some View {
-        TripCard(trip: Trip(routes: [], label: "Default trip"))
+        TripCard(trip: Trip(routes: [], label: "Default trip", alarmTime: Date.now, weekdays: Weekdays()))
     }
 }

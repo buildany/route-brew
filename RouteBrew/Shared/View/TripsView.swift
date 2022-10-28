@@ -10,7 +10,7 @@ import SwiftUI
 struct TripsView: View {
     @State private var showingSheet = false
     @StateObject var tripsModel = TripsViewModel()
-
+    
     var body: some View {
         if tripsModel.trips.count < 1 {
             Spacer()
@@ -18,6 +18,7 @@ struct TripsView: View {
 
         } else {
             TripsListView(trips: tripsModel.trips, removeTrip: tripsModel.removeTrip)
+                
         }
         Spacer()
         Button {

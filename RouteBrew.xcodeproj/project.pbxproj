@@ -9,6 +9,10 @@
 /* Begin PBXBuildFile section */
 		34047D0D29004B67004946D5 /* ExtendedMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34047D0C29004B67004946D5 /* ExtendedMapView.swift */; };
 		340A9231290945D500688B61 /* RouteView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340A9230290945D500688B61 /* RouteView.swift */; };
+		340A9233290A985800688B61 /* TransportTypeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340A9232290A985800688B61 /* TransportTypeView.swift */; };
+		340A9235290AD45000688B61 /* TimeSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340A9234290AD45000688B61 /* TimeSelectorView.swift */; };
+		340A9237290AD6D300688B61 /* WeekdaysSelectorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340A9236290AD6D300688B61 /* WeekdaysSelectorView.swift */; };
+		340A9239290AD73E00688B61 /* Weekdays.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340A9238290AD73E00688B61 /* Weekdays.swift */; };
 		340C48282907F12700C28302 /* TripCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340C48272907F12700C28302 /* TripCard.swift */; };
 		340C482A2907F1A600C28302 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340C48292907F1A600C28302 /* Trip.swift */; };
 		340C482E2907FEA900C28302 /* TripsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340C482D2907FEA900C28302 /* TripsViewModel.swift */; };
@@ -30,6 +34,7 @@
 		341C051828F6BCC9008B48FF /* TrailingIconLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C051728F6BCC9008B48FF /* TrailingIconLabelStyle.swift */; };
 		341C051E28F71686008B48FF /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C051D28F71685008B48FF /* MapView.swift */; };
 		341C056228F95C26008B48FF /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C056128F95C26008B48FF /* SearchTextField.swift */; };
+		34419C56290BE03D0060AE8A /* TimeInterpretationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34419C55290BE03D0060AE8A /* TimeInterpretationView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -52,6 +57,10 @@
 /* Begin PBXFileReference section */
 		34047D0C29004B67004946D5 /* ExtendedMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExtendedMapView.swift; sourceTree = "<group>"; };
 		340A9230290945D500688B61 /* RouteView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteView.swift; sourceTree = "<group>"; };
+		340A9232290A985800688B61 /* TransportTypeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TransportTypeView.swift; sourceTree = "<group>"; };
+		340A9234290AD45000688B61 /* TimeSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSelectorView.swift; sourceTree = "<group>"; };
+		340A9236290AD6D300688B61 /* WeekdaysSelectorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaysSelectorView.swift; sourceTree = "<group>"; };
+		340A9238290AD73E00688B61 /* Weekdays.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Weekdays.swift; sourceTree = "<group>"; };
 		340C48272907F12700C28302 /* TripCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TripCard.swift; sourceTree = "<group>"; };
 		340C48292907F1A600C28302 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		340C482D2907FEA900C28302 /* TripsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsViewModel.swift; sourceTree = "<group>"; };
@@ -76,6 +85,7 @@
 		341C051728F6BCC9008B48FF /* TrailingIconLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailingIconLabelStyle.swift; sourceTree = "<group>"; };
 		341C051D28F71685008B48FF /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		341C056128F95C26008B48FF /* SearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
+		34419C55290BE03D0060AE8A /* TimeInterpretationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterpretationView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -183,6 +193,10 @@
 			isa = PBXGroup;
 			children = (
 				341C04F928F56875008B48FF /* TripFormView.swift */,
+				340A9236290AD6D300688B61 /* WeekdaysSelectorView.swift */,
+				340A9234290AD45000688B61 /* TimeSelectorView.swift */,
+				340A9232290A985800688B61 /* TransportTypeView.swift */,
+				34419C55290BE03D0060AE8A /* TimeInterpretationView.swift */,
 				340A9230290945D500688B61 /* RouteView.swift */,
 				341C050128F57E20008B48FF /* BackgroundView.swift */,
 				341C04D128F5663A008B48FF /* ContentView.swift */,
@@ -203,6 +217,7 @@
 				340C48292907F1A600C28302 /* Trip.swift */,
 				341C050B28F5B647008B48FF /* Location.swift */,
 				341C050928F584B6008B48FF /* Route.swift */,
+				340A9238290AD73E00688B61 /* Weekdays.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -337,6 +352,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				340A9235290AD45000688B61 /* TimeSelectorView.swift in Sources */,
 				341C050028F57D95008B48FF /* TripsListView.swift in Sources */,
 				341C04D228F5663A008B48FF /* ContentView.swift in Sources */,
 				341C050A28F584B6008B48FF /* Route.swift in Sources */,
@@ -344,14 +360,18 @@
 				341C051428F6B770008B48FF /* NoRoutesView.swift in Sources */,
 				341C050228F57E20008B48FF /* BackgroundView.swift in Sources */,
 				341C051E28F71686008B48FF /* MapView.swift in Sources */,
+				340A9239290AD73E00688B61 /* Weekdays.swift in Sources */,
+				34419C56290BE03D0060AE8A /* TimeInterpretationView.swift in Sources */,
 				340C482E2907FEA900C28302 /* TripsViewModel.swift in Sources */,
 				341C050828F5833C008B48FF /* TripsView.swift in Sources */,
 				341C04FA28F56875008B48FF /* TripFormView.swift in Sources */,
 				341C04D028F5663A008B48FF /* RouteBrewApp.swift in Sources */,
 				341C050C28F5B647008B48FF /* Location.swift in Sources */,
+				340A9233290A985800688B61 /* TransportTypeView.swift in Sources */,
 				340C482A2907F1A600C28302 /* Trip.swift in Sources */,
 				341C051828F6BCC9008B48FF /* TrailingIconLabelStyle.swift in Sources */,
 				341C04FE28F57483008B48FF /* TripReactiveFormModel.swift in Sources */,
+				340A9237290AD6D300688B61 /* WeekdaysSelectorView.swift in Sources */,
 				34047D0D29004B67004946D5 /* ExtendedMapView.swift in Sources */,
 				340A9231290945D500688B61 /* RouteView.swift in Sources */,
 				341C056228F95C26008B48FF /* SearchTextField.swift in Sources */,

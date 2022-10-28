@@ -28,13 +28,14 @@ struct SearchTextField: View {
                     Image(systemName: "\(label).circle")
                         .foregroundColor(placemark == nil ? .gray.opacity(0.5) : .green.opacity(0.5))
                         .padding(.leading)
-                        .padding(.trailing)
+                       
                     
                     TextField(placeholder, text: $searchText)
                         .padding(.top)
                         .padding(.bottom)
                         .foregroundColor(.primary)
                         .frame(alignment: .leading)
+                       
                         
 
                     HStack {
@@ -70,6 +71,7 @@ struct SearchTextField: View {
             .overlay(
                 RoundedRectangle(cornerRadius: 7)
                     .stroke(Color.gray, lineWidth: 1)
+                    .shadow(radius: 4)
             )
             
             if let places = fetchedPlaces, !places.isEmpty, placemark == nil {

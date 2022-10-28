@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import MapKit
 
 struct RouteView: View {
     @State var enabled: Bool {
@@ -21,16 +22,21 @@ struct RouteView: View {
         self.enabled = route.enabled
     }
 
+
     var body: some View {
         Toggle(isOn: $enabled, label: {
-            HStack {
+            HStack(spacing: 5) {
                 Text(route.name)
                     .bold()
+                TransportTypeView(transportType: route.transportType)
+                  
+                    .foregroundColor(.gray)
                 Spacer()
+                
                 Text("\(Int(route.travelTime/60)) min.")
                     .font(.caption)
             }
         })
-        .toggleStyle(SwitchToggleStyle(tint: .red.opacity(0.75)))
+        .toggleStyle(SwitchToggleStyle(tint: .green.opacity(0.75)))
     }
 }
