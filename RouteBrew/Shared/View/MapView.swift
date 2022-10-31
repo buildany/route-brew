@@ -10,7 +10,6 @@ import SwiftUI
 
 struct MapView: UIViewRepresentable {
     @Binding var routes: [Route]
-//    @EnvironmentObject var form: TripReactiveFormModel
     
     var mkMapView: MKMapView
 
@@ -19,20 +18,27 @@ struct MapView: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: MKMapView, context: Context) {
+        let preferredRoute:Route? = routes.first {
+            route in route.enabled
+        }
         var overlays: [MKPolylineRenderer] = []
+        var enabled: MKPolylineRenderer?
+        
         for overlay in uiView.overlays {
-            overlays.append(MKPolylineRenderer(overlay: overlay))
+            if let pr = preferredRoute,  overlay.subtitle == pr.id.uuidString {
+                enabled = MKPolylineRenderer(overlay: overlay)
+            } else {
+                overlays.append(MKPolylineRenderer(overlay: overlay))
+            }
         }
         
         uiView.removeOverlays(uiView.overlays)
         for renderer in overlays {
-        
-            renderer.strokeColor = UIColor.red
-            renderer.setNeedsDisplay()
             uiView.addOverlay(renderer.polyline, level: .aboveRoads)
-            
         }
         
-      }
-    
+        if let prRenderer = enabled {
+            uiView.addOverlay(prRenderer.polyline, level: .aboveRoads)
+        }
+    }
 }
