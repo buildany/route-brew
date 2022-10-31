@@ -9,7 +9,7 @@ import Foundation
 import CoreLocation
 import MapKit
 
-class Route: Identifiable, Equatable {
+struct Route: Identifiable, Equatable {
     var id: UUID = UUID()
     var name: String
     var travelTime: Double
@@ -27,6 +27,21 @@ class Route: Identifiable, Equatable {
         self.transportType = transportType
         self.travelTime = travelTime
     }
+    
+    init(from: Route) {
+        self.id = from.id
+        self.name = from.name
+        self.enabled = from.enabled
+        self.transportType = from.transportType
+        self.travelTime = from.travelTime
+    }
 
+    mutating func enable() {
+        self.enabled = true
+    }
+    
+    mutating func disable() {
+        self.enabled = false
+    }
     static let example = Route(name: "Home", travelTime: 10000, transportType: .any, enabled: true)
 }

@@ -9,8 +9,8 @@ import SwiftUI
 
 struct TimeSelectorView: View {
     @Binding var time: Date
+    
     var body: some View {
-        
         DatePicker(selection: $time, displayedComponents: .hourAndMinute, label: {})
             .datePickerStyle(.wheel)
             .navigationTitle( "Set alarm time")

@@ -27,19 +27,14 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
     @Published var trip = Trip()
     @Published private(set) var locationServiceStatus: LocationServiceStatus = .undefined
     @Published var mapView: ExtendedMapView = .init()
-    @Published var tripLabel: String = "Everyday drive"
     @Published var startSearchText: String = ""
     @Published var endSearchText: String = ""
     @Published private(set) var startFetchedPlaces: [CLPlacemark]?
     @Published private(set) var endFetchedPlaces: [CLPlacemark]?
     @Published private(set) var currentUserLocation: CLLocation?
     @Published private(set) var canUseCurrentLocation = true
-    @Published var transportType = MKDirectionsTransportType.automobile.rawValue
     @Published private(set) var availableTransportTypes = [MKDirectionsTransportType.automobile.rawValue, MKDirectionsTransportType.transit.rawValue, MKDirectionsTransportType.walking.rawValue]
-    @Published var alarmTime = Date()
-    @Published var repeatDays: Weekdays = Weekdays()
-    @Published var timeInterpretation: TimeInterpretation = .departure
-    
+
     private var startAnotation: MKAnnotation?
     private var endAnotation: MKAnnotation?
 
@@ -58,8 +53,6 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
     }
 
     private let endPlacePublisher = CurrentValueSubject<CLPlacemark?, Never>(nil)
-
-    @Published var routes: [Route] = []
 
     private var cancellableSet: Set<AnyCancellable> = []
     @Published var validationMessages = [(RoutePin, String)]()
@@ -135,7 +128,7 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
     func clearStartPlacemark() {
         startSearchText = ""
         routeStartPlacemark = nil
-        routes = []
+        trip.routes = []
         mapView.removeOverlays(mapView.overlays)
         if let an1 = startAnotation {
             mapView.removeAnnotation(an1)
@@ -145,7 +138,7 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
     func clearEndPlacemark() {
         endSearchText = ""
         routeEndPlacemark = nil
-        routes = []
+        trip.routes = []
         mapView.removeOverlays(mapView.overlays)
         if let an2 = endAnotation {
             mapView.removeAnnotation(an2)
@@ -153,7 +146,7 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
     }
 
     func getTrip() -> Trip {
-        return Trip(routes: routes, label: tripLabel, alarmTime: alarmTime, weekdays: repeatDays )
+        return trip
     }
 
     private func areSame(_ l1: CLLocation?, _ l2: CLLocation?) -> Bool {
@@ -199,9 +192,8 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
 
         let destPlaceMark = MKPlacemark(coordinate: endLocation.coordinate)
         request.destination = MKMapItem(placemark: destPlaceMark)
-        request.transportType = [MKDirectionsTransportType(rawValue: transportType)]
+        request.transportType = [MKDirectionsTransportType(rawValue: trip.transportType)]
         request.requestsAlternateRoutes = true
-  
 
         let directions = MKDirections(request: request)
 
@@ -215,16 +207,17 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
 
             let minTravelTime = response.routes.map { $0.expectedTravelTime }.min()
             var enabledRoute: MKRoute?
+
             for route in response.routes.sorted(by: { $0.expectedTravelTime > $1.expectedTravelTime }) {
                 let routeExpectedTravelTime = Double(route.expectedTravelTime)
                 let isEnabled = minTravelTime == route.expectedTravelTime
                 let routeData = Route(name: route.name, travelTime: routeExpectedTravelTime, transportType: route.transportType, enabled: isEnabled)
-                self.routes.append(routeData)
-                
+                self.trip.routes.append(routeData)
+
                 route.polyline.subtitle = routeData.id.uuidString
                 route.polyline.title = route.name
 
-                self.mapView.addOverlay(route.polyline)
+                self.mapView.addOverlay(route.polyline, level: .aboveRoads)
                 enabledRoute = isEnabled ? route : nil
             }
             if let eRoute = enabledRoute {
@@ -392,19 +385,21 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
         return marker
     }
 
+
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay)
 
         if let sub = overlay.subtitle {
-            let route = routes.first(where: {
+            let route = trip.routes.first(where: {
                 r in
                 r.id.uuidString == sub
             })
             guard let routeData = route else { return renderer }
 
             renderer.strokeColor = routeData.enabled ? UIColor.blue : UIColor.gray
+            
         }
-
+        
         return renderer
     }
 

@@ -9,7 +9,9 @@ import MapKit
 import SwiftUI
 
 struct MapView: UIViewRepresentable {
-    @State private var annotation = MKPointAnnotation()
+    @Binding var routes: [Route]
+    @EnvironmentObject var form: TripReactiveFormModel
+    
     var mkMapView: MKMapView
 
     func makeUIView(context: Context) -> MKMapView {
@@ -17,5 +19,20 @@ struct MapView: UIViewRepresentable {
     }
 
     func updateUIView(_ uiView: MKMapView, context: Context) {
-    }
+        var overlays: [MKPolylineRenderer] = []
+        for overlay in uiView.overlays {
+            overlays.append(MKPolylineRenderer(overlay: overlay))
+        }
+        
+        uiView.removeOverlays(uiView.overlays)
+        for renderer in overlays {
+        
+            renderer.strokeColor = UIColor.red
+            renderer.setNeedsDisplay()
+            uiView.addOverlay(renderer.polyline, level: .aboveRoads)
+            
+        }
+        
+      }
+    
 }

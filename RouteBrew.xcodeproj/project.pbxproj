@@ -35,6 +35,7 @@
 		341C051E28F71686008B48FF /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C051D28F71685008B48FF /* MapView.swift */; };
 		341C056228F95C26008B48FF /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C056128F95C26008B48FF /* SearchTextField.swift */; };
 		34419C56290BE03D0060AE8A /* TimeInterpretationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34419C55290BE03D0060AE8A /* TimeInterpretationView.swift */; };
+		34419C58290BED1A0060AE8A /* TripRoutesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34419C57290BED1A0060AE8A /* TripRoutesView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,6 +87,7 @@
 		341C051D28F71685008B48FF /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		341C056128F95C26008B48FF /* SearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
 		34419C55290BE03D0060AE8A /* TimeInterpretationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterpretationView.swift; sourceTree = "<group>"; };
+		34419C57290BED1A0060AE8A /* TripRoutesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripRoutesView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -193,6 +195,7 @@
 			isa = PBXGroup;
 			children = (
 				341C04F928F56875008B48FF /* TripFormView.swift */,
+				34419C57290BED1A0060AE8A /* TripRoutesView.swift */,
 				340A9236290AD6D300688B61 /* WeekdaysSelectorView.swift */,
 				340A9234290AD45000688B61 /* TimeSelectorView.swift */,
 				340A9232290A985800688B61 /* TransportTypeView.swift */,
@@ -363,6 +366,7 @@
 				340A9239290AD73E00688B61 /* Weekdays.swift in Sources */,
 				34419C56290BE03D0060AE8A /* TimeInterpretationView.swift in Sources */,
 				340C482E2907FEA900C28302 /* TripsViewModel.swift in Sources */,
+				34419C58290BED1A0060AE8A /* TripRoutesView.swift in Sources */,
 				341C050828F5833C008B48FF /* TripsView.swift in Sources */,
 				341C04FA28F56875008B48FF /* TripFormView.swift in Sources */,
 				341C04D028F5663A008B48FF /* RouteBrewApp.swift in Sources */,

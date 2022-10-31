@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import MapKit
 
 enum TimeInterpretation {
     case departure, arrival
@@ -19,11 +20,11 @@ enum TimeInterpretation {
 }
 
 struct Trip: Identifiable, Equatable {
-    var id: UUID = UUID()
-    var routes: [Route] 
-    var label: String
-    var timeInterpretation: TimeInterpretation
-
+    var id: UUID = .init()
+    var routes: [Route] = []
+    var label: String = "My trip"
+    var timeInterpretation: TimeInterpretation = .departure
+    var transportType = MKDirectionsTransportType.automobile.rawValue
     static var defaultTime: Date {
         var components = DateComponents()
         components.hour = 7
@@ -32,18 +33,17 @@ struct Trip: Identifiable, Equatable {
     }
 
     var alarmTime: Date = defaultTime
-    var weekdays: Weekdays
+    var repeatDays = Weekdays()
     
     static func ==(trip1: Trip, trip2: Trip) -> Bool {
         trip1.id == trip2.id
     }
     
-    init(routes: [Route], label: String, alarmTime: Date, weekdays: Weekdays) {
-        self.routes = routes
-        self.label = label == "" ? "Label" : label
-        self.id = UUID()
-        self.alarmTime = alarmTime
-        self.weekdays = weekdays
-        self.timeInterpretation = .departure
+    mutating func updateRoutes(toggled: UUID) {
+        for (index, route) in routes.enumerated() {
+            if route.id != toggled {
+                routes[index].enabled = false
+            }
+        }
     }
 }

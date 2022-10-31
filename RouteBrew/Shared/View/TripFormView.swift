@@ -17,7 +17,7 @@ enum Tab {
 struct TripFormView: View {
     @Environment(\.dismiss) var dismiss
     @EnvironmentObject var form: TripReactiveFormModel
-    @State private var selection: String = "two"
+    @State private var selection: String = "one"
 
     var save: (Trip) -> Void
 
@@ -42,7 +42,7 @@ struct TripFormView: View {
                 .padding()
                 VStack {
                     VStack(alignment: .leading, spacing: 5) {
-                        Picker("Transport type", selection: $form.transportType) {
+                        Picker("Transport type", selection: $form.trip.transportType) {
                             ForEach(form.availableTransportTypes, id: \.self) {
                                 TransportTypeView(transportType: MKDirectionsTransportType(rawValue: $0))
                             }
@@ -59,27 +59,16 @@ struct TripFormView: View {
                                         onSelectCurrentLocation: form.addCurrentLocationPinAsEnd)
                             
                         if form.saveAllowed {
-                            VStack {
-                                HStack {
-                                    Text("Preferred routes".uppercased())
-                                        .foregroundColor(.gray.opacity(0.75))
-                                        .font(.caption)
-                                        .padding(.top)
-                                    Spacer()
-                                }
-                                    
-                                ForEach(form.routes) { route in
-                                    RouteView(route: route)
-                                }
-                            }
+                            TripRoutesView(routes: $form.trip.routes,  toggleRouteCallback: form.trip.updateRoutes)
                         }
                     }.padding()
                 }.background(.white)
                     
-                MapView(mkMapView: form.mapView)
+                MapView(routes: $form.trip.routes, mkMapView: form.mapView)
                     .ignoresSafeArea()
             }
             .tag("one")
+            
             VStack {
                 NavigationView {
                     VStack {
@@ -107,24 +96,24 @@ struct TripFormView: View {
                         }.padding()
                         VStack {
                             Form {
-                                Picker("Time interpretation", selection: $form.timeInterpretation) {
+                                Picker("Time interpretation", selection: $form.trip.timeInterpretation) {
                                     ForEach([TimeInterpretation.departure, TimeInterpretation.arrival], id: \.self) {
                                         TimeInterpretationView(timeInterpretation: $0)
                                     }
                                 }
                                 .pickerStyle(.segmented)
-                                DatePicker(selection: $form.alarmTime, displayedComponents: .hourAndMinute, label: {})
+                                DatePicker(selection: $form.trip.alarmTime, displayedComponents: .hourAndMinute, label: {})
                                     .datePickerStyle(.wheel)
                                     .labelsHidden()
                                 
                                 NavigationLink {
-                                    WeekdaysSelectorView(weekdays: $form.repeatDays)
+                                    WeekdaysSelectorView(weekdays: $form.trip.repeatDays)
                                 } label: {
                                     HStack {
                                         Text("Repeat")
                                             .foregroundColor(.gray.opacity(0.8))
                                         Spacer()
-                                        Text(form.repeatDays.rawValue)
+                                        Text(form.trip.repeatDays.rawValue)
                                     }
                                 }
                                 
@@ -133,11 +122,10 @@ struct TripFormView: View {
                                         .multilineTextAlignment(.leading)
                                         .foregroundColor(.gray.opacity(0.8))
                                     Spacer()
-                                    TextField("My commute", text: $form.tripLabel).textFieldStyle(.plain)
+                                    TextField("My commute", text: $form.trip.label).textFieldStyle(.plain)
                                         .multilineTextAlignment(.trailing)
                                         .foregroundColor(.red.opacity(0.75))
                                 }
-                                    
                             }
                         }
                     }

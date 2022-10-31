@@ -30,8 +30,3 @@ struct TripCard: View {
     }
 }
 
-struct RouteCard_Previews: PreviewProvider {
-    static var previews: some View {
-        TripCard(trip: Trip(routes: [], label: "Default trip", alarmTime: Date.now, weekdays: Weekdays()))
-    }
-}
