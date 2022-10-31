@@ -37,29 +37,29 @@ struct TripFormView: View {
                     label: {
                             Text("Next")
                         }
-                        .disabled(!form.saveAllowed)
+                    .disabled(!form.trip.isValid)
                 }
                 .padding()
                 VStack {
                     VStack(alignment: .leading, spacing: 5) {
                         Picker("Transport type", selection: $form.trip.transportType) {
-                            ForEach(form.availableTransportTypes, id: \.self) {
+                            ForEach(form.trip.availableTransportTypes, id: \.self) {
                                 TransportTypeView(transportType: MKDirectionsTransportType(rawValue: $0))
                             }
                         }
                         .pickerStyle(.segmented)
-                        SearchTextField(searchText: $form.startSearchText, fetchedPlaces: form.startFetchedPlaces, onSelect: form.addStartPin, placeholder: "Start location", placemark: form.routeStartPlacemark,
+                        SearchTextField(searchText: $form.startSearchText, fetchedPlaces: form.startFetchedPlaces, onSelect: form.addStartPin, placeholder: "Start location", placemark: form.trip.startPlacemark,
                                         deletePlace: form.clearStartPlacemark, label: "a",
                                         canUseCurrentLocation: form.canUseCurrentLocation,
                                         onSelectCurrentLocation: form.addCurrentLocationPinAsStart)
                             
-                        SearchTextField(searchText: $form.endSearchText, fetchedPlaces: form.endFetchedPlaces, onSelect: form.addEndPin, placeholder: "Final location", placemark: form.routeEndPlacemark,
+                        SearchTextField(searchText: $form.endSearchText, fetchedPlaces: form.endFetchedPlaces, onSelect: form.addEndPin, placeholder: "Final location", placemark: form.trip.endPlacemark,
                                         deletePlace: form.clearEndPlacemark, label: "b",
                                         canUseCurrentLocation: form.canUseCurrentLocation,
                                         onSelectCurrentLocation: form.addCurrentLocationPinAsEnd)
                             
-                        if form.saveAllowed {
-                            TripRoutesView(routes: $form.trip.routes,  toggleRouteCallback: form.trip.updateRoutes)
+                        if form.trip.isValid {
+                            TripRoutesView(routes: $form.trip.routes)
                         }
                     }.padding()
                 }.background(.white)
@@ -92,7 +92,7 @@ struct TripFormView: View {
                             label: {
                                 Text("Save")
                             }
-                            .disabled(!form.saveAllowed)
+                            .disabled(!form.trip.isValid)
                         }.padding()
                         VStack {
                             Form {

@@ -10,16 +10,8 @@ import CoreLocation
 import Foundation
 import MapKit
 
-enum RouteSelection {
-    case start, end, done
-}
-
 enum LocationServiceStatus {
     case enabled, disabled, error, undefined
-}
-
-enum RoutePin {
-    case start, end
 }
 
 class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLocationManagerDelegate {
@@ -32,35 +24,15 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
     @Published private(set) var startFetchedPlaces: [CLPlacemark]?
     @Published private(set) var endFetchedPlaces: [CLPlacemark]?
     @Published private(set) var currentUserLocation: CLLocation?
-    @Published private(set) var canUseCurrentLocation = true
-    @Published private(set) var availableTransportTypes = [MKDirectionsTransportType.automobile.rawValue, MKDirectionsTransportType.transit.rawValue, MKDirectionsTransportType.walking.rawValue]
+    @Published private(set) var canUseCurrentLocation = false
 
     private var startAnotation: MKAnnotation?
     private var endAnotation: MKAnnotation?
 
-    @Published var routeStartPlacemark: CLPlacemark? = nil {
-        didSet {
-            startPlacePublisher.send(routeStartPlacemark)
-        }
-    }
-
-    private let startPlacePublisher = CurrentValueSubject<CLPlacemark?, Never>(nil)
-
-    @Published var routeEndPlacemark: CLPlacemark? = nil {
-        didSet {
-            endPlacePublisher.send(routeEndPlacemark)
-        }
-    }
-
-    private let endPlacePublisher = CurrentValueSubject<CLPlacemark?, Never>(nil)
-
-    private var cancellableSet: Set<AnyCancellable> = []
-    @Published var validationMessages = [(RoutePin, String)]()
-    @Published var saveAllowed: Bool = false
-
     private let startPinIdentifier = "startPinIdentifier"
     private let endPinIdentifier = "endPinIdentifier"
-
+    private var cancellableSet: Set<AnyCancellable> = []
+    
     override init() {
         super.init()
         manager.delegate = self
@@ -71,9 +43,14 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
             .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
             .removeDuplicates()
             .sink(receiveValue: { value in
-                if value != "" {
+                if value != "" && self.trip.startPlacemark == nil {
                     self.fetchPlaces(value: value, pin: .start)
-                } else {
+                }
+                if value == "" && self.trip.startPlacemark != nil {
+                    self.startFetchedPlaces = nil
+                    self.trip.removeStartPlacemark()
+                }
+                if value != "" && self.trip.startPlacemark != nil {
                     self.startFetchedPlaces = nil
                 }
             })
@@ -83,62 +60,51 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
             .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
             .removeDuplicates()
             .sink(receiveValue: { value in
-                if value != "" {
+                if value != "" && self.trip.endPlacemark == nil {
                     self.fetchPlaces(value: value, pin: .end)
-                } else {
+                }
+                if value == "" && self.trip.endPlacemark != nil {
+                    self.endFetchedPlaces = nil
+                    self.trip.removeEndPlacemark()
+                }
+                if value != "" && self.trip.endPlacemark != nil {
                     self.endFetchedPlaces = nil
                 }
             })
             .store(in: &cancellableSet)
 
-        let validationPipeline = Publishers.CombineLatest(startPlacePublisher, endPlacePublisher)
-            .map { arg -> [(RoutePin, String)] in
+        
+        Publishers.CombineLatest(trip.startPlacemarkPublisher, trip.endPlacemarkPublisher)
+            .map { arg -> Bool in
                 let (start, end) = arg
-                var validationMsg = [(RoutePin, String)]()
-                if self.areSame(start?.location, end?.location) {
-                    validationMsg.append((.end, "The placemarks should be different."))
+                if let startPlace = start {
+                    self.startSearchText = self.getPlaceString(placemark: startPlace)
                 }
-
-                self.canUseCurrentLocation = !(self.areSame(start?.location, self.currentUserLocation) || self.areSame(end?.location, self.currentUserLocation))
-
-                if start == nil {
-                    validationMsg.append((.start, "Select start point."))
+                if let endPlace = end {
+                    self.endSearchText = self.getPlaceString(placemark: endPlace)
                 }
-
-                if end == nil {
-                    validationMsg.append((.end, "Select finish point."))
-                }
-
-                return validationMsg
+                let res =  !(self.areSame(start?.location, self.currentUserLocation) || self.areSame(end?.location, self.currentUserLocation))
+                print("CanUseCurrentLocation:'\(res)'")
+                return res
             }
-
-        validationPipeline
-            .map {
-                stringArray in
-                stringArray.count < 1
-            }
-            .assign(to: \.saveAllowed, on: self)
-            .store(in: &cancellableSet)
-
-        validationPipeline
-            .assign(to: \.validationMessages, on: self)
+            .assign(to: \.canUseCurrentLocation, on: self)
             .store(in: &cancellableSet)
     }
 
     func clearStartPlacemark() {
         startSearchText = ""
-        routeStartPlacemark = nil
-        trip.routes = []
+        trip.removeStartPlacemark()
+
         mapView.removeOverlays(mapView.overlays)
         if let an1 = startAnotation {
             mapView.removeAnnotation(an1)
         }
     }
+    
 
     func clearEndPlacemark() {
         endSearchText = ""
-        routeEndPlacemark = nil
-        trip.routes = []
+        trip.removeEndPlacemark()
         mapView.removeOverlays(mapView.overlays)
         if let an2 = endAnotation {
             mapView.removeAnnotation(an2)
@@ -181,10 +147,12 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
     }
 
     func requestDirections() {
-        guard let startPlacemark = routeStartPlacemark else { return }
-        guard let endPlacemark = routeEndPlacemark else { return }
+        guard let startPlacemark = trip.startPlacemark else { return }
+        guard let endPlacemark = trip.endPlacemark else { return }
         guard let startLocation = startPlacemark.location else { return }
         guard let endLocation = endPlacemark.location else { return }
+        
+        print("requestDirections start")
 
         let request = MKDirections.Request()
         let sourcePlaceMark = MKPlacemark(coordinate: startLocation.coordinate)
@@ -211,10 +179,10 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
             for route in response.routes.sorted(by: { $0.expectedTravelTime > $1.expectedTravelTime }) {
                 let routeExpectedTravelTime = Double(route.expectedTravelTime)
                 let isEnabled = minTravelTime == route.expectedTravelTime
-                let routeData = Route(name: route.name, travelTime: routeExpectedTravelTime, transportType: route.transportType, enabled: isEnabled)
-                self.trip.routes.append(routeData)
 
-                route.polyline.subtitle = routeData.id.uuidString
+                let routeId = self.trip.addRoute(name: route.name, travelTime: routeExpectedTravelTime, enabled: isEnabled)
+
+                route.polyline.subtitle = routeId.uuidString
                 route.polyline.title = route.name
 
                 self.mapView.addOverlay(route.polyline, level: .aboveRoads)
@@ -285,21 +253,18 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
         }
         Task {
             await MainActor.run(body: {
-                let placeDescription = self.getPlaceString(placemark: place)
+               
                 if pin == .start {
-                    routeStartPlacemark = place
-                    startSearchText = placeDescription
-                    startFetchedPlaces = []
+                    trip.addStartPlacemark(placemark: place)
+                    print("Added pin start")
                 } else {
-                    routeEndPlacemark = place
-                    endSearchText = placeDescription
-                    endFetchedPlaces = []
+                    trip.addEndPlacemark(placemark: place)
+                    print("Added pin end")
                 }
 
-                if routeEndPlacemark != nil, routeStartPlacemark != nil {
+                if trip.startPlacemark != nil && trip.endPlacemark != nil {
                     self.requestDirections()
                 }
-
             })
         }
     }
@@ -331,19 +296,8 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
         return placeData.lazy.joined(separator: ", ")
     }
 
-    private func getRoutePin() -> RoutePin? {
-        if routeStartPlacemark == nil {
-            return .start
-        }
-        if routeEndPlacemark == nil {
-            return .end
-        }
-
-        return nil
-    }
-
     func addAnnotation(for coordinate: CLLocationCoordinate2D) {
-        guard let pin = getRoutePin() else { return }
+        guard let pin = trip.getRoutePin() else { return }
 
         Task {
             do {
@@ -376,7 +330,7 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
     }
 
     func mapView(_ mapView: MKMapView, viewFor annotation: MKAnnotation) -> MKAnnotationView? {
-        guard let pin = getRoutePin() else { return nil }
+        guard let pin = trip.getRoutePin() else { return nil }
         let reuseIdentifier = pin == .start ? startPinIdentifier : endPinIdentifier
         let marker = MKMarkerAnnotationView(annotation: annotation, reuseIdentifier: reuseIdentifier)
         marker.isDraggable = true
@@ -384,7 +338,6 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
 
         return marker
     }
-
 
     func mapView(_ mapView: MKMapView, rendererFor overlay: MKOverlay) -> MKOverlayRenderer {
         let renderer = MKPolylineRenderer(overlay: overlay)
@@ -397,9 +350,8 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
             guard let routeData = route else { return renderer }
 
             renderer.strokeColor = routeData.enabled ? UIColor.blue : UIColor.gray
-            
         }
-        
+
         return renderer
     }
 
@@ -418,9 +370,9 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
 
                 await MainActor.run(body: {
                     if annotationIdentifier == startPinIdentifier {
-                        self.routeStartPlacemark = place
+                        trip.addStartPlacemark(placemark: place)
                     } else {
-                        self.routeEndPlacemark = place
+                        trip.addEndPlacemark(placemark: place)
                     }
                 })
             } catch {}

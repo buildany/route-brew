@@ -10,7 +10,7 @@ import SwiftUI
 
 struct MapView: UIViewRepresentable {
     @Binding var routes: [Route]
-    @EnvironmentObject var form: TripReactiveFormModel
+//    @EnvironmentObject var form: TripReactiveFormModel
     
     var mkMapView: MKMapView
 

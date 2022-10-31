@@ -8,8 +8,8 @@
 import SwiftUI
 
 struct ContentView: View {
-    @StateObject var tripsModel = TripsViewModel()
-    @StateObject var form = TripReactiveFormModel()
+    @ObservedObject var tripsModel = TripsViewModel()
+    @ObservedObject var form = TripReactiveFormModel()
     var body: some View {
         ZStack {
             BackgroundView()

@@ -17,9 +17,7 @@ struct RouteView: View {
             HStack(spacing: 5) {
                 Text(route.name)
                     .bold()
-                TransportTypeView(transportType: route.transportType)
-
-                    .foregroundColor(.gray)
+                
                 Spacer()
 
                 Text("\(Int(route.travelTime / 60)) min.")
@@ -27,8 +25,11 @@ struct RouteView: View {
             }
         })
         .toggleStyle(SwitchToggleStyle(tint: .green.opacity(0.75)))
-        .onReceive([route.enabled].publisher.first()) { _ in
-            routeToggled(route.id)
+        .onChange(of: route.enabled) { _isOn in
+            if _isOn {
+                routeToggled(route.id)
+            }
         }
+        .disabled(route.enabled)
     }
 }

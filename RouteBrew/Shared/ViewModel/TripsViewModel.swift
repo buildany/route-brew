@@ -17,6 +17,9 @@ class TripsViewModel: ObservableObject {
     
     func addTrip(trip: Trip?) {
         guard let newTrip = trip else { return }
+        for route in newTrip.routes {
+            print ("name - \(route.name) - \(route.enabled)")
+        }
         trips.append(newTrip)
     }
     

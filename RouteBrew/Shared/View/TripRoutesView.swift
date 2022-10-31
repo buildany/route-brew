@@ -9,9 +9,16 @@ import SwiftUI
 
 struct TripRoutesView: View {
     @Binding var routes: [Route]
-    var toggleRouteCallback: (UUID) -> Void
     
-   
+    
+    func updateRoutes(toggled: UUID) {
+        for (index, route) in routes.enumerated() {
+            if route.id != toggled {
+                routes[index].enabled = false
+            }
+        }
+    }
+    
     var body: some View {
         VStack {
             HStack {
@@ -21,12 +28,10 @@ struct TripRoutesView: View {
                     .padding(.top)
                 Spacer()
             }
-            
+
             ForEach($routes) { route in
-                RouteView(route: route, routeToggled: toggleRouteCallback)
+                RouteView(route: route, routeToggled: updateRoutes)
             }
         }
     }
-    
 }
-
