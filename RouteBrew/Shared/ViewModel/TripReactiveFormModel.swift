@@ -32,7 +32,7 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
     private let startPinIdentifier = "startPinIdentifier"
     private let endPinIdentifier = "endPinIdentifier"
     private var cancellableSet: Set<AnyCancellable> = []
-    
+
     override init() {
         super.init()
         manager.delegate = self
@@ -43,14 +43,14 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
             .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
             .removeDuplicates()
             .sink(receiveValue: { value in
-                if value != "" && self.trip.startPlacemark == nil {
+                if value != "", self.trip.startPlacemark == nil {
                     self.fetchPlaces(value: value, pin: .start)
                 }
-                if value == "" && self.trip.startPlacemark != nil {
+                if value == "", self.trip.startPlacemark != nil {
                     self.startFetchedPlaces = nil
                     self.trip.removeStartPlacemark()
                 }
-                if value != "" && self.trip.startPlacemark != nil {
+                if value != "", self.trip.startPlacemark != nil {
                     self.startFetchedPlaces = nil
                 }
             })
@@ -60,20 +60,19 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
             .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
             .removeDuplicates()
             .sink(receiveValue: { value in
-                if value != "" && self.trip.endPlacemark == nil {
+                if value != "", self.trip.endPlacemark == nil {
                     self.fetchPlaces(value: value, pin: .end)
                 }
-                if value == "" && self.trip.endPlacemark != nil {
+                if value == "", self.trip.endPlacemark != nil {
                     self.endFetchedPlaces = nil
                     self.trip.removeEndPlacemark()
                 }
-                if value != "" && self.trip.endPlacemark != nil {
+                if value != "", self.trip.endPlacemark != nil {
                     self.endFetchedPlaces = nil
                 }
             })
             .store(in: &cancellableSet)
-
-        
+       
         Publishers.CombineLatest(trip.startPlacemarkPublisher, trip.endPlacemarkPublisher)
             .map { arg -> Bool in
                 let (start, end) = arg
@@ -83,12 +82,12 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
                 if let endPlace = end {
                     self.endSearchText = self.getPlaceString(placemark: endPlace)
                 }
-                let res =  !(self.areSame(start?.location, self.currentUserLocation) || self.areSame(end?.location, self.currentUserLocation))
-                print("CanUseCurrentLocation:'\(res)'")
-                return res
+
+                return !(self.areSame(start?.location, self.currentUserLocation) || self.areSame(end?.location, self.currentUserLocation))
             }
             .assign(to: \.canUseCurrentLocation, on: self)
             .store(in: &cancellableSet)
+     
     }
 
     func clearStartPlacemark() {
@@ -100,7 +99,6 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
             mapView.removeAnnotation(an1)
         }
     }
-    
 
     func clearEndPlacemark() {
         endSearchText = ""
@@ -146,14 +144,40 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
         }
     }
 
+    func redrawDirections() {
+        let preferredRoute: Route? = trip.routes.first {
+            route in route.enabled
+        }
+        var overlays: [MKPolylineRenderer] = []
+        var enabled: MKPolylineRenderer?
+
+        for overlay in mapView.overlays {
+            if let pr = preferredRoute, overlay.subtitle == pr.id.uuidString {
+                enabled = MKPolylineRenderer(overlay: overlay)
+            } else {
+                overlays.append(MKPolylineRenderer(overlay: overlay))
+            }
+        }
+
+        mapView.removeOverlays(mapView.overlays)
+        for renderer in overlays {
+            mapView.addOverlay(renderer.polyline, level: .aboveRoads)
+        }
+
+        if let prRenderer = enabled {
+            mapView.addOverlay(prRenderer.polyline, level: .aboveRoads)
+        }
+    }
+
     func requestDirections() {
         guard let startPlacemark = trip.startPlacemark else { return }
         guard let endPlacemark = trip.endPlacemark else { return }
         guard let startLocation = startPlacemark.location else { return }
         guard let endLocation = endPlacemark.location else { return }
-        
-        print("requestDirections start")
 
+        mapView.removeOverlays(mapView.overlays)
+        trip.removeAllRoutes()
+        
         let request = MKDirections.Request()
         let sourcePlaceMark = MKPlacemark(coordinate: startLocation.coordinate)
         request.source = MKMapItem(placemark: sourcePlaceMark)
@@ -173,9 +197,9 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
                 return
             }
 
+            
             let minTravelTime = response.routes.map { $0.expectedTravelTime }.min()
             var enabledRoute: MKRoute?
-
             for route in response.routes.sorted(by: { $0.expectedTravelTime > $1.expectedTravelTime }) {
                 let routeExpectedTravelTime = Double(route.expectedTravelTime)
                 let isEnabled = minTravelTime == route.expectedTravelTime
@@ -253,16 +277,13 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
         }
         Task {
             await MainActor.run(body: {
-               
                 if pin == .start {
                     trip.addStartPlacemark(placemark: place)
-                    print("Added pin start")
                 } else {
                     trip.addEndPlacemark(placemark: place)
-                    print("Added pin end")
                 }
 
-                if trip.startPlacemark != nil && trip.endPlacemark != nil {
+                if trip.startPlacemark != nil, trip.endPlacemark != nil {
                     self.requestDirections()
                 }
             })

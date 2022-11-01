@@ -30,7 +30,13 @@ class Trip: Identifiable, Equatable, ObservableObject {
     @Published var routes: [Route] = []
     @Published var label: String = "My trip"
     @Published var timeInterpretation: TimeInterpretation = .departure
-    @Published var transportType = MKDirectionsTransportType.automobile.rawValue
+    @Published var transportType = MKDirectionsTransportType.automobile.rawValue {
+        didSet {
+            transportTypePublisher.send(transportType)
+        }
+    }
+    let transportTypePublisher = CurrentValueSubject<UInt, Never>(MKDirectionsTransportType.automobile.rawValue)
+
     @Published private(set) var availableTransportTypes = [MKDirectionsTransportType.automobile.rawValue, MKDirectionsTransportType.transit.rawValue, MKDirectionsTransportType.walking.rawValue]
     static var defaultTime: Date {
         var components = DateComponents()
@@ -107,11 +113,15 @@ class Trip: Identifiable, Equatable, ObservableObject {
     
     func removeStartPlacemark() {
         self.startPlacemark = nil
-        self.routes = []
+        self.removeAllRoutes()
     }
     
     func removeEndPlacemark() {
         self.endPlacemark = nil
+        self.removeAllRoutes()
+    }
+    
+    func removeAllRoutes() {
         self.routes = []
     }
     
@@ -145,12 +155,5 @@ class Trip: Identifiable, Equatable, ObservableObject {
 
         return false
     }
-    
-    func updateRoutes(toggled: UUID) {
-        for (index, route) in routes.enumerated() {
-            if route.id != toggled {
-                routes[index].enabled = false
-            }
-        }
-    }
+
 }

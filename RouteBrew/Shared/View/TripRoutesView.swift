@@ -8,29 +8,37 @@
 import SwiftUI
 
 struct TripRoutesView: View {
-    @Binding var routes: [Route]
+    @ObservedObject var trip: Trip
     
     
     func updateRoutes(toggled: UUID) {
-        for (index, route) in routes.enumerated() {
+        for (index, route) in trip.routes.enumerated() {
             if route.id != toggled {
-                routes[index].enabled = false
+                trip.routes[index].enabled = false
             }
         }
     }
     
     var body: some View {
         VStack {
-            HStack {
-                Text("Preferred routes".uppercased())
+            if trip.routes.count < 1 {
+                Text("No routes found".uppercased())
                     .foregroundColor(.gray.opacity(0.75))
                     .font(.caption)
                     .padding(.top)
-                Spacer()
-            }
-
-            ForEach($routes) { route in
-                RouteView(route: route, routeToggled: updateRoutes)
+             
+            } else {
+                HStack {
+                    Text("Preferred routes".uppercased())
+                        .foregroundColor(.gray.opacity(0.75))
+                        .font(.caption)
+                        .padding(.top)
+                    Spacer()
+                }
+                
+                ForEach($trip.routes) { route in
+                    RouteView(route: route, routeToggled: updateRoutes)
+                }
             }
         }
     }

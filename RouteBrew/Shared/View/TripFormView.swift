@@ -37,7 +37,7 @@ struct TripFormView: View {
                     label: {
                             Text("Next")
                         }
-                    .disabled(!form.trip.isValid)
+                        .disabled(!form.trip.isValid)
                 }
                 .padding()
                 VStack {
@@ -48,27 +48,35 @@ struct TripFormView: View {
                             }
                         }
                         .pickerStyle(.segmented)
+                        .onChange(of: form.trip.transportType) { _ in
+                            Task {
+                                await MainActor.run(body: {
+                                 
+                                    form.requestDirections()
+                                })
+                            }
+                        }
                         SearchTextField(searchText: $form.startSearchText, fetchedPlaces: form.startFetchedPlaces, onSelect: form.addStartPin, placeholder: "Start location", placemark: form.trip.startPlacemark,
                                         deletePlace: form.clearStartPlacemark, label: "a",
                                         canUseCurrentLocation: form.canUseCurrentLocation,
                                         onSelectCurrentLocation: form.addCurrentLocationPinAsStart)
-                            
+
                         SearchTextField(searchText: $form.endSearchText, fetchedPlaces: form.endFetchedPlaces, onSelect: form.addEndPin, placeholder: "Final location", placemark: form.trip.endPlacemark,
                                         deletePlace: form.clearEndPlacemark, label: "b",
                                         canUseCurrentLocation: form.canUseCurrentLocation,
                                         onSelectCurrentLocation: form.addCurrentLocationPinAsEnd)
-                            
+
                         if form.trip.isValid {
-                            TripRoutesView(routes: $form.trip.routes)
+                            TripRoutesView(trip: form.trip)
                         }
                     }.padding()
                 }.background(.white)
-                    
+
                 MapView(routes: $form.trip.routes, mkMapView: form.mapView)
                     .ignoresSafeArea()
             }
             .tag("one")
-            
+
             VStack {
                 NavigationView {
                     VStack {
@@ -83,7 +91,7 @@ struct TripFormView: View {
                             Spacer()
                             Text("Alarm settings".uppercased())
                                 .foregroundColor(.gray.opacity(0.75))
-                                
+
                             Spacer()
                             Button {
                                 save(form.getTrip())
@@ -105,7 +113,7 @@ struct TripFormView: View {
                                 DatePicker(selection: $form.trip.alarmTime, displayedComponents: .hourAndMinute, label: {})
                                     .datePickerStyle(.wheel)
                                     .labelsHidden()
-                                
+
                                 NavigationLink {
                                     WeekdaysSelectorView(weekdays: $form.trip.repeatDays)
                                 } label: {
@@ -116,7 +124,7 @@ struct TripFormView: View {
                                         Text(form.trip.repeatDays.rawValue)
                                     }
                                 }
-                                
+
                                 HStack {
                                     Text("Label")
                                         .multilineTextAlignment(.leading)
