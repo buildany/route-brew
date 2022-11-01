@@ -7,11 +7,21 @@
 
 import MapKit
 import SwiftUI
+import Foundation
 
 struct RouteView: View {
     @Binding var route: Route
     var routeToggled: (UUID) -> Void
-
+    
+    
+    func formatInterval(_ timeInterval: Double) -> String {
+        let formatter = DateComponentsFormatter()
+        formatter.allowedUnits = [.hour, .minute]
+        formatter.unitsStyle = .abbreviated
+        
+        return formatter.string(from: route.travelTime)!
+    }
+    
     var body: some View {
         Toggle(isOn: $route.enabled, label: {
             HStack(spacing: 5) {
@@ -20,7 +30,7 @@ struct RouteView: View {
                 
                 Spacer()
 
-                Text("\(Int(route.travelTime / 60)) min.")
+                Text("\(formatInterval(route.travelTime))")
                     .font(.caption)
             }
         })
