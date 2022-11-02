@@ -9,7 +9,7 @@ import Combine
 import Foundation
 import SwiftUI
 
-struct Route: Identifiable, Equatable {
+struct Route: Identifiable, Equatable, Hashable {
     var id: UUID = .init()
     var name: String
     var travelTime: Double

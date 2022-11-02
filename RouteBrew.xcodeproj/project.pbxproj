@@ -17,6 +17,9 @@
 		340C482A2907F1A600C28302 /* Trip.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340C48292907F1A600C28302 /* Trip.swift */; };
 		340C482E2907FEA900C28302 /* TripsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340C482D2907FEA900C28302 /* TripsViewModel.swift */; };
 		341312E129116107009921E5 /* TimeIntervalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341312E029116107009921E5 /* TimeIntervalView.swift */; };
+		341312E729130131009921E5 /* RouteConfigurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341312E629130131009921E5 /* RouteConfigurationView.swift */; };
+		341312E929130210009921E5 /* AlarmSettingsConfigurationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341312E829130210009921E5 /* AlarmSettingsConfigurationView.swift */; };
+		341312EB29130927009921E5 /* EditTripFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341312EA29130927009921E5 /* EditTripFormView.swift */; };
 		341C04D028F5663A008B48FF /* RouteBrewApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C04CF28F5663A008B48FF /* RouteBrewApp.swift */; };
 		341C04D228F5663A008B48FF /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C04D128F5663A008B48FF /* ContentView.swift */; };
 		341C04D428F5663C008B48FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 341C04D328F5663C008B48FF /* Assets.xcassets */; };
@@ -24,14 +27,12 @@
 		341C04E128F5663C008B48FF /* RouteBrewTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C04E028F5663C008B48FF /* RouteBrewTests.swift */; };
 		341C04EB28F5663C008B48FF /* RouteBrewUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C04EA28F5663C008B48FF /* RouteBrewUITests.swift */; };
 		341C04ED28F5663C008B48FF /* RouteBrewUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C04EC28F5663C008B48FF /* RouteBrewUITestsLaunchTests.swift */; };
-		341C04FA28F56875008B48FF /* TripFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C04F928F56875008B48FF /* TripFormView.swift */; };
+		341C04FA28F56875008B48FF /* NewTripFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C04F928F56875008B48FF /* NewTripFormView.swift */; };
 		341C04FE28F57483008B48FF /* TripReactiveFormModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C04FD28F57483008B48FF /* TripReactiveFormModel.swift */; };
-		341C050028F57D95008B48FF /* TripsListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C04FF28F57D95008B48FF /* TripsListView.swift */; };
 		341C050228F57E20008B48FF /* BackgroundView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C050128F57E20008B48FF /* BackgroundView.swift */; };
 		341C050828F5833C008B48FF /* TripsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C050728F5833C008B48FF /* TripsView.swift */; };
 		341C050A28F584B6008B48FF /* Route.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C050928F584B6008B48FF /* Route.swift */; };
 		341C050C28F5B647008B48FF /* Location.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C050B28F5B647008B48FF /* Location.swift */; };
-		341C051428F6B770008B48FF /* NoRoutesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C051328F6B770008B48FF /* NoRoutesView.swift */; };
 		341C051828F6BCC9008B48FF /* TrailingIconLabelStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C051728F6BCC9008B48FF /* TrailingIconLabelStyle.swift */; };
 		341C051E28F71686008B48FF /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C051D28F71685008B48FF /* MapView.swift */; };
 		341C056228F95C26008B48FF /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C056128F95C26008B48FF /* SearchTextField.swift */; };
@@ -67,6 +68,9 @@
 		340C48292907F1A600C28302 /* Trip.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Trip.swift; sourceTree = "<group>"; };
 		340C482D2907FEA900C28302 /* TripsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsViewModel.swift; sourceTree = "<group>"; };
 		341312E029116107009921E5 /* TimeIntervalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeIntervalView.swift; sourceTree = "<group>"; };
+		341312E629130131009921E5 /* RouteConfigurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteConfigurationView.swift; sourceTree = "<group>"; };
+		341312E829130210009921E5 /* AlarmSettingsConfigurationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlarmSettingsConfigurationView.swift; sourceTree = "<group>"; };
+		341312EA29130927009921E5 /* EditTripFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditTripFormView.swift; sourceTree = "<group>"; };
 		341C04CC28F5663A008B48FF /* RouteBrew.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RouteBrew.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		341C04CF28F5663A008B48FF /* RouteBrewApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteBrewApp.swift; sourceTree = "<group>"; };
 		341C04D128F5663A008B48FF /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -77,14 +81,12 @@
 		341C04E628F5663C008B48FF /* RouteBrewUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RouteBrewUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		341C04EA28F5663C008B48FF /* RouteBrewUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteBrewUITests.swift; sourceTree = "<group>"; };
 		341C04EC28F5663C008B48FF /* RouteBrewUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteBrewUITestsLaunchTests.swift; sourceTree = "<group>"; };
-		341C04F928F56875008B48FF /* TripFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripFormView.swift; sourceTree = "<group>"; };
+		341C04F928F56875008B48FF /* NewTripFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewTripFormView.swift; sourceTree = "<group>"; };
 		341C04FD28F57483008B48FF /* TripReactiveFormModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripReactiveFormModel.swift; sourceTree = "<group>"; };
-		341C04FF28F57D95008B48FF /* TripsListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsListView.swift; sourceTree = "<group>"; };
 		341C050128F57E20008B48FF /* BackgroundView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BackgroundView.swift; sourceTree = "<group>"; };
 		341C050728F5833C008B48FF /* TripsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripsView.swift; sourceTree = "<group>"; };
 		341C050928F584B6008B48FF /* Route.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Route.swift; sourceTree = "<group>"; };
 		341C050B28F5B647008B48FF /* Location.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Location.swift; sourceTree = "<group>"; };
-		341C051328F6B770008B48FF /* NoRoutesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoRoutesView.swift; sourceTree = "<group>"; };
 		341C051728F6BCC9008B48FF /* TrailingIconLabelStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrailingIconLabelStyle.swift; sourceTree = "<group>"; };
 		341C051D28F71685008B48FF /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
 		341C056128F95C26008B48FF /* SearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
@@ -196,7 +198,10 @@
 		341C052128F717A3008B48FF /* View */ = {
 			isa = PBXGroup;
 			children = (
-				341C04F928F56875008B48FF /* TripFormView.swift */,
+				341C04F928F56875008B48FF /* NewTripFormView.swift */,
+				341312EA29130927009921E5 /* EditTripFormView.swift */,
+				341312E629130131009921E5 /* RouteConfigurationView.swift */,
+				341312E829130210009921E5 /* AlarmSettingsConfigurationView.swift */,
 				34419C57290BED1A0060AE8A /* TripRoutesView.swift */,
 				340A9236290AD6D300688B61 /* WeekdaysSelectorView.swift */,
 				340A9234290AD45000688B61 /* TimeSelectorView.swift */,
@@ -208,9 +213,7 @@
 				341C04D128F5663A008B48FF /* ContentView.swift */,
 				341C051D28F71685008B48FF /* MapView.swift */,
 				34047D0C29004B67004946D5 /* ExtendedMapView.swift */,
-				341C051328F6B770008B48FF /* NoRoutesView.swift */,
 				340C48272907F12700C28302 /* TripCard.swift */,
-				341C04FF28F57D95008B48FF /* TripsListView.swift */,
 				341C050728F5833C008B48FF /* TripsView.swift */,
 				341C056128F95C26008B48FF /* SearchTextField.swift */,
 			);
@@ -359,12 +362,11 @@
 			buildActionMask = 2147483647;
 			files = (
 				341312E129116107009921E5 /* TimeIntervalView.swift in Sources */,
+				341312E729130131009921E5 /* RouteConfigurationView.swift in Sources */,
 				340A9235290AD45000688B61 /* TimeSelectorView.swift in Sources */,
-				341C050028F57D95008B48FF /* TripsListView.swift in Sources */,
 				341C04D228F5663A008B48FF /* ContentView.swift in Sources */,
 				341C050A28F584B6008B48FF /* Route.swift in Sources */,
 				340C48282907F12700C28302 /* TripCard.swift in Sources */,
-				341C051428F6B770008B48FF /* NoRoutesView.swift in Sources */,
 				341C050228F57E20008B48FF /* BackgroundView.swift in Sources */,
 				341C051E28F71686008B48FF /* MapView.swift in Sources */,
 				340A9239290AD73E00688B61 /* Weekdays.swift in Sources */,
@@ -372,11 +374,13 @@
 				340C482E2907FEA900C28302 /* TripsViewModel.swift in Sources */,
 				34419C58290BED1A0060AE8A /* TripRoutesView.swift in Sources */,
 				341C050828F5833C008B48FF /* TripsView.swift in Sources */,
-				341C04FA28F56875008B48FF /* TripFormView.swift in Sources */,
+				341C04FA28F56875008B48FF /* NewTripFormView.swift in Sources */,
 				341C04D028F5663A008B48FF /* RouteBrewApp.swift in Sources */,
 				341C050C28F5B647008B48FF /* Location.swift in Sources */,
 				340A9233290A985800688B61 /* TransportTypeView.swift in Sources */,
 				340C482A2907F1A600C28302 /* Trip.swift in Sources */,
+				341312E929130210009921E5 /* AlarmSettingsConfigurationView.swift in Sources */,
+				341312EB29130927009921E5 /* EditTripFormView.swift in Sources */,
 				341C051828F6BCC9008B48FF /* TrailingIconLabelStyle.swift in Sources */,
 				341C04FE28F57483008B48FF /* TripReactiveFormModel.swift in Sources */,
 				340A9237290AD6D300688B61 /* WeekdaysSelectorView.swift in Sources */,

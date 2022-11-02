@@ -19,8 +19,6 @@ struct SearchTextField: View {
     var canUseCurrentLocation: Bool
     var onSelectCurrentLocation: () -> Void
 
-//    @FocusState var focused: Bool
-
     var body: some View {
         VStack {
             VStack(alignment: .leading) {

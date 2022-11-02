@@ -16,7 +16,7 @@ enum LocationServiceStatus {
 
 class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLocationManagerDelegate {
     var manager = CLLocationManager()
-    @Published var trip = Trip()
+    @Published var trip: Trip
     @Published private(set) var locationServiceStatus: LocationServiceStatus = .undefined
     @Published var mapView: ExtendedMapView = .init()
     @Published var startSearchText: String = ""
@@ -25,20 +25,23 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
     @Published private(set) var endFetchedPlaces: [CLPlacemark]?
     @Published private(set) var currentUserLocation: CLLocation?
     @Published private(set) var canUseCurrentLocation = false
-
+    private var saveTripCallback: (Trip) -> Void
     private var startAnotation: MKAnnotation?
     private var endAnotation: MKAnnotation?
 
     private let startPinIdentifier = "startPinIdentifier"
     private let endPinIdentifier = "endPinIdentifier"
     private var cancellableSet: Set<AnyCancellable> = []
-
-    override init() {
+    
+    init(trip: Trip, save: @escaping (Trip) -> Void) {
+        self.trip = trip
+        self.saveTripCallback = save
+        
         super.init()
         manager.delegate = self
         mapView.delegate = self
         mapView.onLongPress = addAnnotation(for:)
-
+    
         $startSearchText
             .debounce(for: .seconds(0.5), scheduler: DispatchQueue.main)
             .removeDuplicates()
@@ -98,6 +101,10 @@ class TripReactiveFormModel: NSObject, ObservableObject, MKMapViewDelegate, CLLo
         if let an1 = startAnotation {
             mapView.removeAnnotation(an1)
         }
+    }
+    
+    func saveTrip() {
+        self.saveTripCallback(trip)
     }
 
     func clearEndPlacemark() {

@@ -147,6 +147,7 @@ class Trip: Identifiable, Equatable, ObservableObject {
         trip1.id == trip2.id
     }
     
+    
     static func areSame(_ l1: CLLocation?, _ l2: CLLocation?) -> Bool {
         if let loc1 = l1, let loc2 = l2 {
             return loc1.coordinate.latitude == loc2.coordinate.latitude && loc1.coordinate.longitude == loc2.coordinate.longitude

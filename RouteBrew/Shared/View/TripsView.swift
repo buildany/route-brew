@@ -9,31 +9,54 @@ import SwiftUI
 
 struct TripsView: View {
     @State private var showingSheet = false
-    @StateObject var tripsModel = TripsViewModel()
+    @ObservedObject var tripsModel = TripsViewModel()
     
     var body: some View {
-        if tripsModel.trips.count < 1 {
-            Spacer()
-            NoRoutesView()
+        NavigationStack {
+            VStack {
+                if tripsModel.trips.count < 1 {
+                    VStack {
+                        Image(systemName: "alarm.fill")
+                        Text("No route alarms")
+                            .bold()
+                    } .foregroundColor(.gray)
+                    
+                } else {
 
-        } else {
-            TripsListView(trips: tripsModel.trips, removeTrip: tripsModel.removeTrip)
+                    List {
+                        ForEach(tripsModel.trips) { trip in
+                            NavigationLink {
+                                EditTripFormView(trip: trip, save: tripsModel.saveTrip)
+                            } label: {
+                                TripCard(trip: trip)
+                            }
+                        }
+                        .onDelete(perform: tripsModel.removeTrip)
+                       
+                    }
+                    .listStyle(.plain)
+                }
+            }
+            .navigationBarTitle(Text("Route alarms"))
+            .toolbar {
+                ToolbarItem(placement: .navigationBarLeading) {
+                    if tripsModel.trips.count > 0 {
+                        EditButton()
+                    }
+                }
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        showingSheet.toggle()
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                    .padding()
+                    .sheet(isPresented: $showingSheet) {
+                        NewTripFormView(trip: Trip(), save: tripsModel.saveTrip)
+                    }
+                }
+            }
         }
-        Spacer()
-        Button {
-            showingSheet.toggle()
-        } label: {
-            Image(systemName: "plus")
-        }
-        .padding()
-        .background(.red.opacity(0.75))
-        .foregroundColor(.white)
-        .font(.title)
-        .clipShape(Circle())
-        .sheet(isPresented: $showingSheet) {
-            TripFormView(save: tripsModel.addTrip)
-        }
-        .shadow(radius: 2)
     }
 }
 

@@ -7,20 +7,21 @@
 
 import Foundation
 
-
 class TripsViewModel: ObservableObject {
-    @Published var trips: [Trip] = [Trip]()
-    
+    @Published var trips: [Trip] = .init()
+
     func removeTrip(at offsets: IndexSet) {
         trips.remove(atOffsets: offsets)
     }
-    
-    func addTrip(trip: Trip?) {
+
+    func saveTrip(trip: Trip?) {
         guard let newTrip = trip else { return }
-        for route in newTrip.routes {
-            print ("name - \(route.name) - \(route.enabled)")
+        
+        if let existingTripIndex = trips.firstIndex(where: {$0.id == newTrip.id}) {
+            trips[existingTripIndex] = newTrip
         }
-        trips.append(newTrip)
+        else {
+            trips.append(newTrip)
+        }
     }
-    
 }

@@ -8,8 +8,7 @@
 import SwiftUI
 
 struct ContentView: View {
-    @ObservedObject var tripsModel = TripsViewModel()
-    @ObservedObject var form = TripReactiveFormModel()
+  
     var body: some View {
         ZStack {
             BackgroundView()
@@ -17,7 +16,7 @@ struct ContentView: View {
                 TripsView()
             }
 
-        }.environmentObject(form)
+        }
     }
 }
 

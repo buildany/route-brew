@@ -9,13 +9,11 @@ import MapKit
 import SwiftUI
 
 struct TripCard: View {
-    var trip: Trip
+    @ObservedObject var trip: Trip
     
     var body: some View {
         if let route = trip.enabledRoute {
             HStack(alignment: .top) {
-                Image(systemName: "alarm")
-                    .font(.title)
                 VStack(alignment: .leading, spacing: 5) {
                     HStack(spacing: 5) {
                         Text(route.name)
@@ -52,10 +50,7 @@ struct TripCard: View {
                     }
                 }
             }
-            .padding()
-            .background(.white)
-            .cornerRadius(7)
-            .shadow(radius: 2)
+      
         }
         else {
             Text("ROUTES ENABLED")
@@ -67,7 +62,7 @@ struct TripCard_Previews: PreviewProvider {
     static var previews: some View {
         let trip = Trip()
         trip.label = "morning"
-        trip.addRoute(name: "Mijdrechtsedwarsweg", travelTime: 3200, enabled: true)
+        let _ = trip.addRoute(name: "Mijdrechtsedwarsweg", travelTime: 3200, enabled: true)
         trip.alarmTime = Date.now
         trip.repeatDays.selection = [false, false, true, true, false]
         return TripCard(trip: trip)
