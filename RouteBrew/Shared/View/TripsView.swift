@@ -18,7 +18,6 @@ struct TripsView: View {
 
         } else {
             TripsListView(trips: tripsModel.trips, removeTrip: tripsModel.removeTrip)
-                
         }
         Spacer()
         Button {

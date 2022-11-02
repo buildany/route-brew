@@ -5,9 +5,9 @@
 //  Created by km on 25/10/2022.
 //
 
+import Combine
 import Foundation
 import MapKit
-import Combine
 import SwiftUI
 
 enum TimeInterpretation {
@@ -30,13 +30,7 @@ class Trip: Identifiable, Equatable, ObservableObject {
     @Published var routes: [Route] = []
     @Published var label: String = "My trip"
     @Published var timeInterpretation: TimeInterpretation = .departure
-    @Published var transportType = MKDirectionsTransportType.automobile.rawValue {
-        didSet {
-            transportTypePublisher.send(transportType)
-        }
-    }
-    let transportTypePublisher = CurrentValueSubject<UInt, Never>(MKDirectionsTransportType.automobile.rawValue)
-
+    @Published var transportType = MKDirectionsTransportType.automobile.rawValue
     @Published private(set) var availableTransportTypes = [MKDirectionsTransportType.automobile.rawValue, MKDirectionsTransportType.transit.rawValue, MKDirectionsTransportType.walking.rawValue]
     static var defaultTime: Date {
         var components = DateComponents()
@@ -45,8 +39,8 @@ class Trip: Identifiable, Equatable, ObservableObject {
         return Calendar.current.date(from: components) ?? Date.now
     }
 
-    var alarmTime: Date = defaultTime
-    var repeatDays = Weekdays()
+    @Published var alarmTime: Date = defaultTime
+    @Published var repeatDays = Weekdays()
     
     @Published private(set) var startPlacemark: CLPlacemark? = nil {
         didSet {
@@ -56,7 +50,6 @@ class Trip: Identifiable, Equatable, ObservableObject {
 
     let startPlacemarkPublisher = CurrentValueSubject<CLPlacemark?, Never>(nil)
 
-    
     @Published private(set) var endPlacemark: CLPlacemark? = nil {
         didSet {
             endPlacemarkPublisher.send(endPlacemark)
@@ -69,6 +62,13 @@ class Trip: Identifiable, Equatable, ObservableObject {
     @Published var validationMessages = [(RoutePin, String)]()
     
     private var cancellableSet: Set<AnyCancellable> = []
+    
+    var enabledRoute: Route? {
+        routes.first {
+            route in
+            route.enabled
+        }
+    }
     
     init() {
         let validationPipeline = Publishers.CombineLatest(startPlacemarkPublisher, endPlacemarkPublisher)
@@ -101,28 +101,27 @@ class Trip: Identifiable, Equatable, ObservableObject {
         validationPipeline
             .assign(to: \.validationMessages, on: self)
             .store(in: &cancellableSet)
-
     }
     
     func addRoute(name: String, travelTime: Double, enabled: Bool) -> UUID {
         let newRoute = Route(name: name, travelTime: travelTime, enabled: enabled)
-        self.routes.append(newRoute)
+        routes.append(newRoute)
         
         return newRoute.id
     }
     
     func removeStartPlacemark() {
-        self.startPlacemark = nil
-        self.removeAllRoutes()
+        startPlacemark = nil
+        removeAllRoutes()
     }
     
     func removeEndPlacemark() {
-        self.endPlacemark = nil
-        self.removeAllRoutes()
+        endPlacemark = nil
+        removeAllRoutes()
     }
     
     func removeAllRoutes() {
-        self.routes = []
+        routes = []
     }
     
     func addStartPlacemark(placemark: CLPlacemark) {
@@ -134,10 +133,10 @@ class Trip: Identifiable, Equatable, ObservableObject {
     }
     
     func getRoutePin() -> RoutePin? {
-        if self.startPlacemark == nil {
+        if startPlacemark == nil {
             return .start
         }
-        if self.endPlacemark == nil {
+        if endPlacemark == nil {
             return .end
         }
 
@@ -155,5 +154,4 @@ class Trip: Identifiable, Equatable, ObservableObject {
 
         return false
     }
-
 }

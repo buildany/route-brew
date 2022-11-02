@@ -50,7 +50,12 @@ struct Weekdays {
         
         return result
     }
-
+    
+    var isNever: Bool {
+        self.selection.allSatisfy {
+            $0 == false
+        }
+    }
  
     static var all: [Weekday] {
         return [.monday,

@@ -30,7 +30,7 @@ struct RouteView: View {
                 
                 Spacer()
 
-                Text("\(formatInterval(route.travelTime))")
+                TimeIntervalView(timeInterval: route.travelTime)
                     .font(.caption)
             }
         })
