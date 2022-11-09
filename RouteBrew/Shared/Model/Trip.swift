@@ -10,10 +10,10 @@ import Foundation
 import MapKit
 import SwiftUI
 
-enum TimeInterpretation {
+enum TimeInterpretation: Int {
     case departure, arrival
     
-    var rawValue: String {
+    var asString: String {
         switch self {
         case .departure: return "departure"
         case .arrival: return "arrival"
@@ -21,7 +21,7 @@ enum TimeInterpretation {
     }
 }
 
-enum RoutePin {
+enum RoutePin: Int {
     case start, end
 }
 

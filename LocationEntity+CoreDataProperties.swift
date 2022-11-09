@@ -16,9 +16,9 @@ extension LocationEntity {
         return NSFetchRequest<LocationEntity>(entityName: "LocationEntity")
     }
 
-    @NSManaged public var latitude: Double
-    @NSManaged public var longtitude: Double
-    @NSManaged public var pin: Int16
+    @NSManaged public var latitude: NSNumber?
+    @NSManaged public var longtitude: NSNumber?
+    @NSManaged public var pin: NSNumber?
     @NSManaged public var trip: TripEntity?
 
 }

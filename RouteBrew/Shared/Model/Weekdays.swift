@@ -46,6 +46,7 @@ struct Weekdays {
             $0 == false
         }
     }
+    
 
     static func getRawValue(entity: WeekdaysEntity?) -> String {
         guard let e = entity else { return "Never" }

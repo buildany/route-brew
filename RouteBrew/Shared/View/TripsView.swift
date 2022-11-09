@@ -23,7 +23,7 @@ struct TripsView: View {
                     
                 } else {
 
-                    ScrollView {
+                    List {
                         ForEach(vm.trips) { trip in
                             NavigationLink {
 //                                EditTripFormView(trip: trip, save: vm.saveTrip)
