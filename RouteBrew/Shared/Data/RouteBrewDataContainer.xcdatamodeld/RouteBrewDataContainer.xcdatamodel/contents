@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="21279" systemVersion="22A380" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="LocationEntity" representedClassName="LocationEntity" syncable="YES">
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="longtitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <attribute name="pin" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES"/>
+        <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TripEntity" inverseName="locations" inverseEntity="TripEntity"/>
+    </entity>
+    <entity name="RouteEntity" representedClassName="RouteEntity" syncable="YES">
+        <attribute name="enabled" optional="YES" attributeType="Boolean" usesScalarValueType="YES"/>
+        <attribute name="id" optional="YES" attributeType="UUID" usesScalarValueType="NO"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
+        <attribute name="travelTime" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
+        <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TripEntity" inverseName="routes" inverseEntity="TripEntity"/>
+    </entity>
+    <entity name="TripEntity" representedClassName="TripEntity" syncable="YES">
+        <attribute name="alarmTime" optional="YES" attributeType="Date" usesScalarValueType="NO"/>
+        <attribute name="label" attributeType="String"/>
+        <attribute name="timeInterpretation" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO"/>
+        <attribute name="transportType" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="NO"/>
+        <relationship name="locations" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="LocationEntity" inverseName="trip" inverseEntity="LocationEntity"/>
+        <relationship name="repeatDays" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="WeekdaysEntity" inverseName="trip" inverseEntity="WeekdaysEntity"/>
+        <relationship name="routes" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="RouteEntity" inverseName="trip" inverseEntity="RouteEntity"/>
+    </entity>
+    <entity name="WeekdaysEntity" representedClassName="WeekdaysEntity" syncable="YES">
+        <attribute name="friday" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO"/>
+        <attribute name="monday" attributeType="Boolean" defaultValueString="0" usesScalarValueType="NO"/>
+        <attribute name="saturday" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO"/>
+        <attribute name="sunday" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO"/>
+        <attribute name="thursday" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO"/>
+        <attribute name="tuesday" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO"/>
+        <attribute name="wednesday" attributeType="Boolean" defaultValueString="NO" usesScalarValueType="NO"/>
+        <relationship name="trip" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TripEntity" inverseName="repeatDays" inverseEntity="TripEntity"/>
+    </entity>
+</model>

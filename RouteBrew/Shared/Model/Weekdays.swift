@@ -37,26 +37,34 @@ enum Weekday: Int {
 
 struct Weekdays {
     var selection: [Bool] = Array(repeating: false, count: 7)
-
     var rawValue: String {
-        let result = selection.enumerated()
+        return Weekdays.repeatString(value: selection)
+    }
+
+    var isNever: Bool {
+        selection.allSatisfy {
+            $0 == false
+        }
+    }
+
+    static func getRawValue(entity: WeekdaysEntity?) -> String {
+        guard let e = entity else { return "Never" }
+        return repeatString(value: e.values)
+    }
+
+    static func repeatString(value: [Bool]) -> String {
+        let result = value.enumerated()
             .map { ($0, $1) }
             .filter { $0.1 }
-            .map { Weekday(rawValue: $0.0)!.rawValue}
+            .map { Weekday(rawValue: $0.0)!.rawValue }
             .joined(separator: ", ")
         if result == "" {
             return "Never"
         }
-        
+
         return result
     }
-    
-    var isNever: Bool {
-        self.selection.allSatisfy {
-            $0 == false
-        }
-    }
- 
+
     static var all: [Weekday] {
         return [.monday,
                 .tuesday,

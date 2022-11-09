@@ -38,6 +38,20 @@
 		341C056228F95C26008B48FF /* SearchTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 341C056128F95C26008B48FF /* SearchTextField.swift */; };
 		34419C56290BE03D0060AE8A /* TimeInterpretationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34419C55290BE03D0060AE8A /* TimeInterpretationView.swift */; };
 		34419C58290BED1A0060AE8A /* TripRoutesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 34419C57290BED1A0060AE8A /* TripRoutesView.swift */; };
+		344773F1291C2E2400A7D807 /* TripEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344773F0291C2E2400A7D807 /* TripEntity.swift */; };
+		344773F3291C300F00A7D807 /* Optional.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344773F2291C300F00A7D807 /* Optional.swift */; };
+		344773F5291C31E400A7D807 /* RouteEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344773F4291C31E400A7D807 /* RouteEntity.swift */; };
+		344773F7291C341800A7D807 /* WeekdaysEntity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 344773F6291C341800A7D807 /* WeekdaysEntity.swift */; };
+		345DB9CF291C1F3F00151BD6 /* RouteBrewDataContainer.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 345DB9CD291C1F3F00151BD6 /* RouteBrewDataContainer.xcdatamodeld */; };
+		345DB9D8291C2A2400151BD6 /* TripEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345DB9D0291C2A2400151BD6 /* TripEntity+CoreDataClass.swift */; };
+		345DB9D9291C2A2400151BD6 /* TripEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345DB9D1291C2A2400151BD6 /* TripEntity+CoreDataProperties.swift */; };
+		345DB9DA291C2A2400151BD6 /* LocationEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345DB9D2291C2A2400151BD6 /* LocationEntity+CoreDataClass.swift */; };
+		345DB9DB291C2A2400151BD6 /* LocationEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345DB9D3291C2A2400151BD6 /* LocationEntity+CoreDataProperties.swift */; };
+		345DB9DC291C2A2400151BD6 /* RouteEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345DB9D4291C2A2400151BD6 /* RouteEntity+CoreDataClass.swift */; };
+		345DB9DD291C2A2400151BD6 /* RouteEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345DB9D5291C2A2400151BD6 /* RouteEntity+CoreDataProperties.swift */; };
+		345DB9DE291C2A2400151BD6 /* WeekdaysEntity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345DB9D6291C2A2400151BD6 /* WeekdaysEntity+CoreDataClass.swift */; };
+		345DB9DF291C2A2400151BD6 /* WeekdaysEntity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345DB9D7291C2A2400151BD6 /* WeekdaysEntity+CoreDataProperties.swift */; };
+		345DB9E1291C2A3600151BD6 /* DataController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 345DB9E0291C2A3600151BD6 /* DataController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -92,6 +106,20 @@
 		341C056128F95C26008B48FF /* SearchTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTextField.swift; sourceTree = "<group>"; };
 		34419C55290BE03D0060AE8A /* TimeInterpretationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterpretationView.swift; sourceTree = "<group>"; };
 		34419C57290BED1A0060AE8A /* TripRoutesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripRoutesView.swift; sourceTree = "<group>"; };
+		344773F0291C2E2400A7D807 /* TripEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripEntity.swift; sourceTree = "<group>"; };
+		344773F2291C300F00A7D807 /* Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optional.swift; sourceTree = "<group>"; };
+		344773F4291C31E400A7D807 /* RouteEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteEntity.swift; sourceTree = "<group>"; };
+		344773F6291C341800A7D807 /* WeekdaysEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaysEntity.swift; sourceTree = "<group>"; };
+		345DB9CE291C1F3F00151BD6 /* RouteBrewDataContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RouteBrewDataContainer.xcdatamodel; sourceTree = "<group>"; };
+		345DB9D0291C2A2400151BD6 /* TripEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TripEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		345DB9D1291C2A2400151BD6 /* TripEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TripEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		345DB9D2291C2A2400151BD6 /* LocationEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocationEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		345DB9D3291C2A2400151BD6 /* LocationEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "LocationEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		345DB9D4291C2A2400151BD6 /* RouteEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RouteEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		345DB9D5291C2A2400151BD6 /* RouteEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "RouteEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		345DB9D6291C2A2400151BD6 /* WeekdaysEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeekdaysEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
+		345DB9D7291C2A2400151BD6 /* WeekdaysEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeekdaysEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
+		345DB9E0291C2A3600151BD6 /* DataController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -188,6 +216,7 @@
 		341C052028F7179A008B48FF /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				345DB9CC291C1EF800151BD6 /* Data */,
 				341C052228F717C2008B48FF /* Model */,
 				341C052128F717A3008B48FF /* View */,
 				341C051F28F7178A008B48FF /* ViewModel */,
@@ -229,6 +258,27 @@
 				340A9238290AD73E00688B61 /* Weekdays.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		345DB9CC291C1EF800151BD6 /* Data */ = {
+			isa = PBXGroup;
+			children = (
+				345DB9E0291C2A3600151BD6 /* DataController.swift */,
+				345DB9D2291C2A2400151BD6 /* LocationEntity+CoreDataClass.swift */,
+				345DB9D3291C2A2400151BD6 /* LocationEntity+CoreDataProperties.swift */,
+				344773F2291C300F00A7D807 /* Optional.swift */,
+				345DB9CD291C1F3F00151BD6 /* RouteBrewDataContainer.xcdatamodeld */,
+				344773F4291C31E400A7D807 /* RouteEntity.swift */,
+				345DB9D4291C2A2400151BD6 /* RouteEntity+CoreDataClass.swift */,
+				345DB9D5291C2A2400151BD6 /* RouteEntity+CoreDataProperties.swift */,
+				344773F0291C2E2400A7D807 /* TripEntity.swift */,
+				345DB9D0291C2A2400151BD6 /* TripEntity+CoreDataClass.swift */,
+				345DB9D1291C2A2400151BD6 /* TripEntity+CoreDataProperties.swift */,
+				345DB9D6291C2A2400151BD6 /* WeekdaysEntity+CoreDataClass.swift */,
+				344773F6291C341800A7D807 /* WeekdaysEntity.swift */,
+				345DB9D7291C2A2400151BD6 /* WeekdaysEntity+CoreDataProperties.swift */,
+			);
+			path = Data;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -362,28 +412,42 @@
 			buildActionMask = 2147483647;
 			files = (
 				341312E129116107009921E5 /* TimeIntervalView.swift in Sources */,
+				344773F7291C341800A7D807 /* WeekdaysEntity.swift in Sources */,
+				345DB9D8291C2A2400151BD6 /* TripEntity+CoreDataClass.swift in Sources */,
 				341312E729130131009921E5 /* RouteConfigurationView.swift in Sources */,
 				340A9235290AD45000688B61 /* TimeSelectorView.swift in Sources */,
 				341C04D228F5663A008B48FF /* ContentView.swift in Sources */,
+				345DB9CF291C1F3F00151BD6 /* RouteBrewDataContainer.xcdatamodeld in Sources */,
 				341C050A28F584B6008B48FF /* Route.swift in Sources */,
+				344773F5291C31E400A7D807 /* RouteEntity.swift in Sources */,
 				340C48282907F12700C28302 /* TripCard.swift in Sources */,
 				341C050228F57E20008B48FF /* BackgroundView.swift in Sources */,
 				341C051E28F71686008B48FF /* MapView.swift in Sources */,
+				345DB9DC291C2A2400151BD6 /* RouteEntity+CoreDataClass.swift in Sources */,
 				340A9239290AD73E00688B61 /* Weekdays.swift in Sources */,
+				345DB9D9291C2A2400151BD6 /* TripEntity+CoreDataProperties.swift in Sources */,
+				345DB9E1291C2A3600151BD6 /* DataController.swift in Sources */,
 				34419C56290BE03D0060AE8A /* TimeInterpretationView.swift in Sources */,
 				340C482E2907FEA900C28302 /* TripsViewModel.swift in Sources */,
 				34419C58290BED1A0060AE8A /* TripRoutesView.swift in Sources */,
+				344773F3291C300F00A7D807 /* Optional.swift in Sources */,
 				341C050828F5833C008B48FF /* TripsView.swift in Sources */,
 				341C04FA28F56875008B48FF /* NewTripFormView.swift in Sources */,
+				345DB9DA291C2A2400151BD6 /* LocationEntity+CoreDataClass.swift in Sources */,
 				341C04D028F5663A008B48FF /* RouteBrewApp.swift in Sources */,
 				341C050C28F5B647008B48FF /* Location.swift in Sources */,
 				340A9233290A985800688B61 /* TransportTypeView.swift in Sources */,
 				340C482A2907F1A600C28302 /* Trip.swift in Sources */,
+				345DB9DF291C2A2400151BD6 /* WeekdaysEntity+CoreDataProperties.swift in Sources */,
 				341312E929130210009921E5 /* AlarmSettingsConfigurationView.swift in Sources */,
 				341312EB29130927009921E5 /* EditTripFormView.swift in Sources */,
+				344773F1291C2E2400A7D807 /* TripEntity.swift in Sources */,
+				345DB9DD291C2A2400151BD6 /* RouteEntity+CoreDataProperties.swift in Sources */,
 				341C051828F6BCC9008B48FF /* TrailingIconLabelStyle.swift in Sources */,
+				345DB9DE291C2A2400151BD6 /* WeekdaysEntity+CoreDataClass.swift in Sources */,
 				341C04FE28F57483008B48FF /* TripReactiveFormModel.swift in Sources */,
 				340A9237290AD6D300688B61 /* WeekdaysSelectorView.swift in Sources */,
+				345DB9DB291C2A2400151BD6 /* LocationEntity+CoreDataProperties.swift in Sources */,
 				34047D0D29004B67004946D5 /* ExtendedMapView.swift in Sources */,
 				340A9231290945D500688B61 /* RouteView.swift in Sources */,
 				341C056228F95C26008B48FF /* SearchTextField.swift in Sources */,
@@ -717,6 +781,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		345DB9CD291C1F3F00151BD6 /* RouteBrewDataContainer.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				345DB9CE291C1F3F00151BD6 /* RouteBrewDataContainer.xcdatamodel */,
+			);
+			currentVersion = 345DB9CE291C1F3F00151BD6 /* RouteBrewDataContainer.xcdatamodel */;
+			path = RouteBrewDataContainer.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 341C04C428F5663A008B48FF /* Project object */;
 }

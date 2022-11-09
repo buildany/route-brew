@@ -9,22 +9,22 @@ import MapKit
 import SwiftUI
 
 struct TripCard: View {
-    @ObservedObject var trip: Trip
+    @ObservedObject var trip: TripEntity
     
     var body: some View {
         if let route = trip.enabledRoute {
             HStack(alignment: .top) {
                 VStack(alignment: .leading, spacing: 5) {
                     HStack(spacing: 5) {
-                        Text(route.name)
+                        Text(route.wrappedName)
                      
                     }.font(.caption)
-                    Text(trip.alarmTime, format: .dateTime.hour().minute())
+                    Text(trip.wrappedAlarmTime, format: .dateTime.hour().minute())
                         .font(.title)
         
                     HStack {
                         VStack {
-                            Text(trip.label)
+                            Text(trip.wrappedLabel)
                                 .font(.caption)
                                 .padding(3)
                         }
@@ -38,14 +38,16 @@ struct TripCard: View {
                     HStack {
                         TimeIntervalView(timeInterval: route.travelTime)
                             .fontWeight(.bold)
-                        TransportTypeView(transportType: MKDirectionsTransportType(rawValue: trip.transportType))
+                        TransportTypeView(transportType: MKDirectionsTransportType(rawValue: trip.wrappedTransportType))
                             .font(.caption)
                     }
-                    if !trip.repeatDays.isNever {
-                        HStack {
-                            Text(trip.repeatDays.rawValue)
-                                .font(.caption)
-                                .foregroundColor(.gray)
+                    if let repeatSchedule = trip.repeatDays {
+                        if !repeatSchedule.isNever {
+                            HStack {
+                                Text(Weekdays.getRawValue(entity: trip.repeatDays))
+                                    .font(.caption)
+                                    .foregroundColor(.gray)
+                            }
                         }
                     }
                 }
@@ -58,13 +60,3 @@ struct TripCard: View {
     }
 }
 
-struct TripCard_Previews: PreviewProvider {
-    static var previews: some View {
-        let trip = Trip()
-        trip.label = "morning"
-        let _ = trip.addRoute(name: "Mijdrechtsedwarsweg", travelTime: 3200, enabled: true)
-        trip.alarmTime = Date.now
-        trip.repeatDays.selection = [false, false, true, true, false]
-        return TripCard(trip: trip)
-    }
-}

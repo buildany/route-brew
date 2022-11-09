@@ -8,12 +8,13 @@
 import SwiftUI
 
 struct ContentView: View {
-  
+    @StateObject var vm = TripsViewModel()
     var body: some View {
         ZStack {
             BackgroundView()
             VStack {
                 TripsView()
+                    .environmentObject(vm)
             }
 
         }

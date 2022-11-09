@@ -9,12 +9,12 @@ import SwiftUI
 
 struct TripsView: View {
     @State private var showingSheet = false
-    @ObservedObject var tripsModel = TripsViewModel()
+    @EnvironmentObject var vm: TripsViewModel
     
     var body: some View {
         NavigationStack {
             VStack {
-                if tripsModel.trips.count < 1 {
+                if vm.trips.count < 1 {
                     VStack {
                         Image(systemName: "alarm.fill")
                         Text("No route alarms")
@@ -23,15 +23,15 @@ struct TripsView: View {
                     
                 } else {
 
-                    List {
-                        ForEach(tripsModel.trips) { trip in
+                    ScrollView {
+                        ForEach(vm.trips) { trip in
                             NavigationLink {
-                                EditTripFormView(trip: trip, save: tripsModel.saveTrip)
+//                                EditTripFormView(trip: trip, save: vm.saveTrip)
                             } label: {
                                 TripCard(trip: trip)
                             }
                         }
-                        .onDelete(perform: tripsModel.removeTrip)
+                        .onDelete(perform: vm.removeTrip)
                        
                     }
                     .listStyle(.plain)
@@ -40,7 +40,7 @@ struct TripsView: View {
             .navigationBarTitle(Text("Route alarms"))
             .toolbar {
                 ToolbarItem(placement: .navigationBarLeading) {
-                    if tripsModel.trips.count > 0 {
+                    if vm.trips.count > 0 {
                         EditButton()
                     }
                 }
@@ -52,7 +52,7 @@ struct TripsView: View {
                     }
                     .padding()
                     .sheet(isPresented: $showingSheet) {
-                        NewTripFormView(trip: Trip(), save: tripsModel.saveTrip)
+                        NewTripFormView(trip: Trip(), save: vm.saveTrip)
                     }
                 }
             }
