@@ -2,7 +2,7 @@
 //  RouteEntity+CoreDataProperties.swift
 //  RouteBrew
 //
-//  Created by km on 09/11/2022.
+//  Created by km on 18/11/2022.
 //
 //
 
@@ -16,10 +16,10 @@ extension RouteEntity {
         return NSFetchRequest<RouteEntity>(entityName: "RouteEntity")
     }
 
+    @NSManaged public var enabled: NSNumber?
     @NSManaged public var id: UUID?
     @NSManaged public var name: String?
-    @NSManaged public var travelTime: Double
-    @NSManaged public var enabled: Bool
+    @NSManaged public var travelTime: NSNumber?
     @NSManaged public var trip: TripEntity?
 
 }

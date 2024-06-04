@@ -68,8 +68,8 @@ class TripsViewModel: ObservableObject {
             let newRouteEntity = RouteEntity(context: manager.context)
             newRouteEntity.wrappedName = route.name
             newRouteEntity.id = route.id
-            newRouteEntity.enabled = route.enabled
-            newRouteEntity.travelTime = route.travelTime
+            newRouteEntity.enabled = route.enabled as NSNumber
+            newRouteEntity.travelTime = route.travelTime as NSNumber
             
             newEntity.addToRoutes(newRouteEntity)
         }

@@ -110,6 +110,7 @@
 		344773F2291C300F00A7D807 /* Optional.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Optional.swift; sourceTree = "<group>"; };
 		344773F4291C31E400A7D807 /* RouteEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RouteEntity.swift; sourceTree = "<group>"; };
 		344773F6291C341800A7D807 /* WeekdaysEntity.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeekdaysEntity.swift; sourceTree = "<group>"; };
+		344773F82928015500A7D807 /* RouteBrewDataContainer 2.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = "RouteBrewDataContainer 2.xcdatamodel"; sourceTree = "<group>"; };
 		345DB9CE291C1F3F00151BD6 /* RouteBrewDataContainer.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = RouteBrewDataContainer.xcdatamodel; sourceTree = "<group>"; };
 		345DB9D0291C2A2400151BD6 /* TripEntity+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TripEntity+CoreDataClass.swift"; sourceTree = SOURCE_ROOT; };
 		345DB9D1291C2A2400151BD6 /* TripEntity+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "TripEntity+CoreDataProperties.swift"; sourceTree = SOURCE_ROOT; };
@@ -786,6 +787,7 @@
 		345DB9CD291C1F3F00151BD6 /* RouteBrewDataContainer.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
+				344773F82928015500A7D807 /* RouteBrewDataContainer 2.xcdatamodel */,
 				345DB9CE291C1F3F00151BD6 /* RouteBrewDataContainer.xcdatamodel */,
 			);
 			currentVersion = 345DB9CE291C1F3F00151BD6 /* RouteBrewDataContainer.xcdatamodel */;

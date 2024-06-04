@@ -25,11 +25,20 @@ extension TripEntity {
         return locations.array(of: LocationEntity.self)
     }
     
+    
+    var wrappedId: UUID {
+        get {
+            return id ?? UUID()
+        }
+        set (newValue) {
+            id = newValue
+        }
+    }
  
 
-    var wrappedTimeInterpretation: UInt {
+    var wrappedTimeInterpretation: Int {
         get {
-            return timeInterpretation?.uintValue ?? 0
+            return timeInterpretation?.intValue ?? 0
         }
         set(newValue) {
             timeInterpretation = newValue as NSNumber
@@ -54,7 +63,7 @@ extension TripEntity {
     
     var enabledRoute: RouteEntity? {
         return wrappedRoutes.first(where: {
-            $0.enabled
+            Bool(truncating: $0.enabled ?? 0)
         })
     }
    

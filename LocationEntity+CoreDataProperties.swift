@@ -2,7 +2,7 @@
 //  LocationEntity+CoreDataProperties.swift
 //  RouteBrew
 //
-//  Created by km on 09/11/2022.
+//  Created by km on 18/11/2022.
 //
 //
 
@@ -19,6 +19,7 @@ extension LocationEntity {
     @NSManaged public var latitude: NSNumber?
     @NSManaged public var longtitude: NSNumber?
     @NSManaged public var pin: NSNumber?
+    @NSManaged public var id: UUID?
     @NSManaged public var trip: TripEntity?
 
 }

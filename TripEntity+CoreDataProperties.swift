@@ -2,7 +2,7 @@
 //  TripEntity+CoreDataProperties.swift
 //  RouteBrew
 //
-//  Created by km on 09/11/2022.
+//  Created by km on 18/11/2022.
 //
 //
 
@@ -20,6 +20,7 @@ extension TripEntity {
     @NSManaged public var label: String?
     @NSManaged public var timeInterpretation: NSNumber?
     @NSManaged public var transportType: NSNumber?
+    @NSManaged public var id: UUID?
     @NSManaged public var locations: NSSet?
     @NSManaged public var repeatDays: WeekdaysEntity?
     @NSManaged public var routes: NSSet?

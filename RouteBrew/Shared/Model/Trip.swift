@@ -25,8 +25,8 @@ enum RoutePin: Int {
     case start, end
 }
 
-class Trip: Identifiable, Equatable, ObservableObject {
-    var id: UUID = .init()
+class Trip: Equatable, ObservableObject {
+    @Published private(set) var id: UUID = .init()
     @Published var routes: [Route] = []
     @Published var label: String = "My trip"
     @Published var timeInterpretation: TimeInterpretation = .departure
@@ -70,7 +70,15 @@ class Trip: Identifiable, Equatable, ObservableObject {
         }
     }
     
-    init() {
+    init(_ entity: TripEntity? = nil) {
+        if let from = entity {
+            self.label = from.label ?? ""
+            self.alarmTime = from.wrappedAlarmTime
+            self.timeInterpretation = TimeInterpretation(rawValue: from.wrappedTimeInterpretation) ?? .departure
+            self.transportType = from.wrappedTransportType
+            self.id = from.wrappedId
+        }
+        
         let validationPipeline = Publishers.CombineLatest(startPlacemarkPublisher, endPlacemarkPublisher)
             .map { arg -> [(RoutePin, String)] in
                 let (start, end) = arg

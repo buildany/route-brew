@@ -26,7 +26,7 @@ struct TripsView: View {
                     List {
                         ForEach(vm.trips) { trip in
                             NavigationLink {
-//                                EditTripFormView(trip: trip, save: vm.saveTrip)
+//                                EditTripFormView(trip: Trip(trip), save: vm.saveTrip)
                             } label: {
                                 TripCard(trip: trip)
                             }

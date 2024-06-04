@@ -36,7 +36,7 @@ struct TripCard: View {
                 Spacer()
                 VStack(alignment: .trailing, spacing: 5) {
                     HStack {
-                        TimeIntervalView(timeInterval: route.travelTime)
+                        TimeIntervalView(timeInterval: route.wrappedTravelTime)
                             .fontWeight(.bold)
                         TransportTypeView(transportType: MKDirectionsTransportType(rawValue: trip.wrappedTransportType))
                             .font(.caption)

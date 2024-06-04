@@ -10,12 +10,20 @@ import Foundation
 import SwiftUI
 
 struct Route: Identifiable, Equatable, Hashable {
-    var id: UUID = .init()
+    var id: UUID
     var name: String
     var travelTime: Double
     var enabled: Bool
+    
+    init(from: RouteEntity) {
+        self.name = from.wrappedName
+        self.travelTime = from.wrappedTravelTime
+        self.enabled = from.wrappedEnabled
+        self.id = from.id ?? UUID()
+    }
 
     init(name: String, travelTime: Double, enabled: Bool) {
+        self.id = .init()
         self.name = name
         self.travelTime = travelTime
         self.enabled = enabled
